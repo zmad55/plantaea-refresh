@@ -13,12 +13,14 @@ import HomeScreen from './../screens/HomeScreen'
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = () => {
-    const { isLoading, userToken } = useContext(AuthContext);
+    //const { isLoading, userToken } = useContext(AuthContext);
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Details" component={DetailsScreen} />
-        </Drawer.Navigator>
+        <NavigationContainer>
+            <Drawer.Navigator>
+                <Drawer.Screen name="Home" component={HomeScreen} />
+            </Drawer.Navigator>
+        </NavigationContainer>
+
 
 
         // return (
@@ -28,5 +30,5 @@ const AppNavigation = () => {
         // );
     );
 };
-
+/* <Drawer.Screen name="Details" component={DetailsScreen} /> */
 export default AppNavigation;
