@@ -9,7 +9,7 @@ Note:
 5. Follow the Step-bystep walkthrough
 
 Step-by-step walkthrough:
-## Install dependencies
+## Install dependencies, if node_module exists skip npm install
 ```
 npm install
 npm install -g nodemon
@@ -19,5 +19,3 @@ npm install -g nodemon
 ```
 npm run dev
 ```
-
-6. If 
