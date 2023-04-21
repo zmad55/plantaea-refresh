@@ -3,8 +3,8 @@ import { Text, TouchableOpacity, TextInput } from 'react-native'
 
 export default function CustomButton({ label, onPress }) {
     return (
-        <TouchableOpacity onPress={onPress} style={{ backgroundColor: '#1C4C4E', padding: 20, borderRadius: 10, marginBottom: 30 }}>
-            <Text style={{ textAlign: 'center', fontWeight: '700', fontSize: 16, color: 'white' }}>{label}</Text>
+        <TouchableOpacity onPress={onPress} className="bg-teal-900 p-5 rounded-lg mt-5 mb-5">
+            <Text className="text-center font-bold text-white text-lg">{label}</Text>
         </TouchableOpacity>
     )
 }

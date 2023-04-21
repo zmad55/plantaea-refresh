@@ -69,11 +69,28 @@ export const login = async (req, res) => {
     }
 }
 
+// Verify
+export const isAuthenticated = async (req, res, next) => {
+    try {
+        const { token } = req.cookies;
+        if (!token) return res.status(401).json({ success: false, message: 'Please login first' })
+        
+        console.log(token)
+        const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+        console.log(decoded)
+        req.user = await User.findById(decoded._id)
+        res.status(200).json({ success: true, message: 'User authenticated' });
+        next();
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
 // Logs out user
 export const logout = async (req, res) => {
     try {
         // Get the token from the request header
-        const token = res.cookie('token');
+        const token = res.cookies('token');
         if (!token) {
             return res.status(401).json({ message: 'No token provided' });
         }
@@ -99,4 +116,5 @@ export const logout = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 }
+
 

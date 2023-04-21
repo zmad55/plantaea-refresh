@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, TextInput } from 'react-native'
 
-export default function InputField({ label, icon, inputType, keyboardType }) {
+export default function InputField({ value, label, icon, inputType, keyboardType, onChangeText }) {
     return (
-        <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomColor: '#ccc', borderBottomWidth: 1, paddingBottom: 8, marginBottom: 25 }}>
+        <View className="flex-row items-center border-b border-gray-300 pb-4 mb-1">
             {icon}
             {inputType == 'password' ?
-                (<TextInput placeholder={label} keyboardType={keyboardType} style={{ flex: 1, paddingVertical: 0 }} secureTextEntry={true} />) :
-                (<TextInput placeholder={label} keyboardType={keyboardType} style={{ flex: 1, paddingVertical: 0 }} />)}
+                (<TextInput value={value} placeholder={label} keyboardType={keyboardType} className="flex-1 py-0" onChangeText={onChangeText} secureTextEntry={true} />) :
+                (<TextInput value={value} placeholder={label} keyboardType={keyboardType} className="flex-1 py-0" onChangeText={onChangeText} />)}
         </View>
     )
 }
