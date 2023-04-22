@@ -1,7 +1,18 @@
-const CameraBottomTabButton = ({ children, onPress }) => (
-    <TouchableOpacity className="absolute -top-30 justify-center items-center shadow-lime-500 shadow-color-7F5DF0 shadow-offset-0-10 shadow-opacity-25 shadow-radius-3.5 elevation-5 transform-translate-y-10" onPress={onPress}>
-        <View className="w-{70} h-{35} rounded-{35/2}">
-            {children}
-        </View>
-    </TouchableOpacity>
-);
+import React from 'react';
+import { View, TouchableHighlight } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+export default function CustomCameraButton({ onPress, focused }) {
+    return (
+        <TouchableHighlight
+            className="items-center justify-center bg-green-600 rounded-full w-20 h-20 bottom-5"
+            underlayColor="darkgreen"
+            onPress={onPress}
+        >
+            <View className='items-center justify-center bg-green-600 rounded-full w-20 h-20' >
+                <MaterialCommunityIcons name="camera-iris" size={60} color={focused ? "grey" : "white"} />
+            </View>
+        </TouchableHighlight>
+    );
+}
