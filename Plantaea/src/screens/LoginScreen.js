@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Image, SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
-
-import { login } from "./../../redux/action.js"
-import { useDispatch, useSelector } from 'react-redux'
 
 import InputField from '../components/InputField'
 import CustomButton from '../components/CustomButton'
@@ -11,24 +9,31 @@ import CustomButton from '../components/CustomButton'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const LoginScreen = ({ navigation }) => {
-    const { isAuthenticated, error } = useSelector(state => state.auth);
+import { useDispatch, useSelector } from "react-redux";
+
+import { userLogin } from './../../redux/actions/authActions';
+import { storeData, getData } from "./../../redux/asyncStorage"
+
+export default function LoginScreen() {
+    const { error, userInfo } = useSelector((state) => state.auth)
 
     const dispatch = useDispatch();
 
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
 
+    const navigation = useNavigation();
+
     const loginHandler = () => {
-        dispatch(login(username, password))
+        dispatch(userLogin({ username: username, password: password }))
     };
 
     useEffect(() => {
-        console.log(error, isAuthenticated),
-            alert(error),
+        if (error) {
+            alert(error)
             dispatch({ type: "clearError" })
-    }, [error, dispatch, alert,]);
-
+        }
+    }, [error, dispatch, alert])
 
     return (
         <SafeAreaView className="flex-1 justify-center">
@@ -72,5 +77,3 @@ const LoginScreen = ({ navigation }) => {
         </SafeAreaView>
     )
 }
-
-export default LoginScreen

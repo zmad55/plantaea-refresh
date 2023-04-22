@@ -13,6 +13,7 @@ import CameraBottomTabButton from './CustomCameraButton';
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Feather from 'react-native-vector-icons/Feather';
+import { getData } from '../../redux/asyncStorage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,7 +22,7 @@ const footer = () => {
     const navigation = useNavigation()
     return (
         <View className="p-5 bg-green-400 flex-row justify-around">
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity onPress={() => getData('token')}>
                 <Ionicons name="home-outline" color={"#900"} size={30} />
             </TouchableOpacity>
             <TouchableOpacity >

@@ -59,7 +59,7 @@ export const login = async (req, res) => {
             .json({
                 success: true,
                 message: "Login successful",
-                data: token,
+                cookieToken: token,
                 user: user.username,
                 userId: user._id
             })
@@ -74,7 +74,7 @@ export const isAuthenticated = async (req, res, next) => {
     try {
         const { token } = req.cookies;
         if (!token) return res.status(401).json({ success: false, message: 'Please login first' })
-        
+
         console.log(token)
         const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
         console.log(decoded)

@@ -1,11 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import authReducer from './slices/authSlice'
+import thunkMiddleware from 'redux-thunk';
 
-import { authReducer } from "./reducer";
+const reducer = {
+    auth: authReducer
+};
 
 const store = configureStore({
-    reducer: {
-        auth: authReducer,
-    }
+    reducer: reducer,
+    devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        // Set the immutableCheck to false to disable the middleware
+        immutableCheck: false
+    }).concat(thunkMiddleware)
 });
 
 export default store;
