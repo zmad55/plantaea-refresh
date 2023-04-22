@@ -5645,6 +5645,11 @@ expo-pwa@0.0.124:
     commander "2.20.0"
     update-check "1.5.3"
 
+expo-secure-store@^12.1.1:
+  version "12.1.1"
+  resolved "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-12.1.1.tgz"
+  integrity sha512-phD8e8mlJWaESUBCpHq0GjS3OiqZ7g+I6SpTGQpt+xSS0pEE1ZUBXnIF+WR2OvoseKiS9ODzDl85CUlut/eNKw==
+
 expo-sharing@~11.0.1:
   version "11.0.1"
   resolved "https://registry.npmjs.org/expo-sharing/-/expo-sharing-11.0.1.tgz"

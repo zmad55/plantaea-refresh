@@ -1,6 +1,10 @@
 import axios from "axios";
+import * as SecureStore from 'expo-secure-store';
 
 const serverURL = "http://192.168.1.2:4000/api/user";
+
+// Assume that the token is stored in the 'token' property of the response object.
+const token = await login.json().token;
 
 export const login = (username, password) => async (dispatch) => {
     try {
@@ -22,10 +26,16 @@ export const login = (username, password) => async (dispatch) => {
 
 export const loadUser = () => async (dispatch) => {
     try {
+        //const token = await SecureStore.getItemAsync(Cookie);
+        console.log(token)
         dispatch({ type: "loadUserRequest" });
-
-        //const { data } = await axios.get(`${serverURL}/me`);
-        const { data } = await axios.get("http://10.0.2.2:4000/api/user/me");
+        const { data } = await axios.post(`${serverURL}/me`,
+            { token },
+            {
+                headers: {
+                    "Cookie": `${token}`
+                }
+            });
         dispatch({ type: "loadUserSuccess", payload: data });
     } catch (error) {
         console.log(error)

@@ -12,7 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const LoginScreen = ({ navigation }) => {
-    const { error } = useSelector(state => state.auth);
+    const { isAuthenticated, error } = useSelector(state => state.auth);
 
     const dispatch = useDispatch();
 
@@ -21,11 +21,10 @@ const LoginScreen = ({ navigation }) => {
 
     const loginHandler = () => {
         dispatch(login(username, password))
-        console.log("Login button clicked")
     };
 
     useEffect(() => {
-        console.log(error),
+        console.log(error, isAuthenticated),
             alert(error),
             dispatch({ type: "clearError" })
     }, [error, dispatch, alert,]);

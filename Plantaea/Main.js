@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from './redux/action'
+import { loadUser, getToken } from './redux/action'
 
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
@@ -32,6 +32,8 @@ const Main = () => {
             </NavigationContainer>
     )
 }
+
+
 
 export default Main;
 
