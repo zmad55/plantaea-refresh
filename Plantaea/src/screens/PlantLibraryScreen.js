@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TextInput, StyleSheet, Image, ImageBackground } from 'react-native'
 
 import Feather from 'react-native-vector-icons/Feather'
-import { alignItems } from 'react-native-wind/dist/styles/flex/align-items'
 import ListItem from '../components/ListItem'
-import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomSwitchLibrary from "../components/CustomSwitchLibrary";
-import { windowWidth, windowHeight } from '../utils/Dimensions';
 import { plantListLibrary } from '../data/data'
 
 const PlantLibrary = ({ navigation, route }) => {
@@ -15,12 +12,11 @@ const PlantLibrary = ({ navigation, route }) => {
   const onSelectSwitch = (value) => {
     setDescriptionTab(value);
   }
-  //style={{ flex: 1, padding: 5, paddingTop: windowHeight - (windowHeight - 25), backgroundColor: 'white' }}
   return (
     <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
       <SafeAreaView className="flex-1">
-        <View className="overflow-hidden, padding-bottom: 5">
-          <SafeAreaView className="bg-white flex items-center shadow-black shadow-offset-width-1 shadow-offset-height-1 shadow-opacity-100 shadow-radius-3.5 shadow-elevation-5">
+        <View className="overflow-hidden">
+          <SafeAreaView className="bg-white items-center shadow-2xl">
             <Image
               source={require('../../assets/plantaea-logo.png')}
               resizeMode="contain"
@@ -29,7 +25,7 @@ const PlantLibrary = ({ navigation, route }) => {
             <Text className="font-bold text-2xl text-teal-800 mb-4">
               ETHNOBOTANICAL PLANTS
             </Text>
-            <View className="px-5 flex-row justify-between items-center">
+            <View className="px-8 flex-row justify-between items-center rounded-md">
               <CustomSwitchLibrary
                 selectionMode={1}
                 option1="All"
@@ -39,13 +35,14 @@ const PlantLibrary = ({ navigation, route }) => {
                 onSelectSwitch={onSelectSwitch}
               />
             </View>
-            <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mb-1 mx-5">
-            <Feather name="search" size={20} color="#1C4C4E" style={{ marginRight: 5 }} />
-              <TextInput placeholder='Search'  className="flex-1 pt-2 pr-10 pb-2 pl-0 rounded-none" />
+            <View className="border-b-2 border-gray-300 w-10/12" />
+            <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-1 mb-1 mx-5">
+              <Feather name="search" size={20} color="#1C4C4E" />
+              <TextInput placeholder='Search' className="flex-1 pt-2 pr-12 pb-2 pl-2 text-gray-500" />
             </View>
           </SafeAreaView>
         </View>
-        <ScrollView style={{ paddingHorizontal: 15, paddingVertical: 15, marginTop: 0 }}>
+        <ScrollView className="px-4 py-5 mt-0">
           {descriptionTab == 1 &&
             <View>
               {plantListLibrary.map(item => (
@@ -89,7 +86,7 @@ const PlantLibrary = ({ navigation, route }) => {
             </View>
           }
 
-          <View style={{ padding: 7, borderTopWidth: 1, borderTopColor: 'white', marginTop: 60 }} />
+          <View className="padding-2 border-t-1 border-t-white mt-20" />
         </ScrollView>
       </SafeAreaView >
     </View>
@@ -97,13 +94,3 @@ const PlantLibrary = ({ navigation, route }) => {
 }
 
 export default PlantLibrary
-
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 1,
-    shadowRadius: 3.5,
-    elevation: 5
-  }
-});

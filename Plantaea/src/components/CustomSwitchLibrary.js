@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity} from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 export default function CustomSwitchLibrary({
     selectionMode,
@@ -18,37 +18,63 @@ export default function CustomSwitchLibrary({
     }
 
     return (
-        <View style={{height:50, width:'100%', backgroundColor:'white', borderRadius:10, borderColor:'#1C4C4E', flexDirection:'row', justifyContent:'center'}}>
-            <TouchableOpacity activeOpacity={1} onPress={() => updateSwitchData(1)}
-            style={{marginTop:getSelectionMode == 1 ? 0 : 17 ,flex:1, backgroundColor: getSelectionMode == 1 ? '#79D27E' : '#DEFFE0', borderTopRightRadius:13,borderTopLeftRadius:13, justifyContent:'center', alignItems:'center'}}>
+        <View className="h-14 w-full bg-white flex-row justify-center">
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => updateSwitchData(1)}
+                className={`${getSelectionMode === 1 ? "mt-0" : "mt-4"} 
+                flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center 
+                ${getSelectionMode === 1 ? "bg-green-500" : "bg-green-200"}`}
+            >
                 <Text
-                style={{color: getSelectionMode == 1 ? 'white' : 'white', fontSize: getSelectionMode == 1 ?14:10}}>
-                    {option1}</Text>
+                    className={`${getSelectionMode === 1 ? "text-white" : "text-white"} 
+                    ${getSelectionMode === 1 ? "text-sm" : "text-xs"}`}
+                >
+                    {option1}
+                </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={() => updateSwitchData(2)}
-            style={{marginTop:getSelectionMode == 2 ? 0 : 17 ,flex:1, backgroundColor: getSelectionMode == 2 ? '#F37373' : '#FFDFDF', borderTopRightRadius:13,borderTopLeftRadius:13, justifyContent:'center', alignItems:'center'}}>
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => updateSwitchData(2)}
+                className={`${getSelectionMode === 2 ? "mt-0" : "mt-4"} 
+                flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center 
+                ${getSelectionMode === 2 ? "bg-red-500" : "bg-red-200"}`}
+            >
                 <Text
-                style={{color: getSelectionMode == 2 ? 'white' : 'white', fontSize: getSelectionMode == 2 ?14:10}}>
-                    {option2}</Text>
+                    className={`${getSelectionMode === 2 ? "text-white" : "text-white"} 
+                    ${getSelectionMode === 2 ? "text-sm" : "text-xs"}`}
+                >
+                    {option2}
+                </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={() => updateSwitchData(3)}
-            style={{marginTop:getSelectionMode == 3 ? 0 : 17 ,flex:1, backgroundColor: getSelectionMode == 3 ? '#F6C36C' : '#FFF7DF', borderTopRightRadius:13,borderTopLeftRadius:13, justifyContent:'center', alignItems:'center'}}>
-                
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => updateSwitchData(3)}
+                className={`${getSelectionMode === 3 ? "mt-0" : "mt-4"} 
+                flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center 
+                ${getSelectionMode === 3 ? "bg-yellow-500" : "bg-yellow-200"}`}
+            >
                 <Text
-                style={{color: getSelectionMode == 3 ? 'white' : 'white', fontSize: getSelectionMode == 3 ?14:10}}>
-                    {option3}</Text>
+                    className={`${getSelectionMode === 3 ? "text-white" : "text-white"} 
+                    ${getSelectionMode === 3 ? "text-sm" : "text-xs"}`}
+                >
+                    {option3}
+                </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={() => updateSwitchData(4)}
-            style={{marginTop:getSelectionMode == 4 ? 0 : 17 ,flex:1, backgroundColor: getSelectionMode == 4 ? '#E281DA' : '#FFE0FC', borderTopRightRadius:13,borderTopLeftRadius:13, justifyContent:'center', alignItems:'center'}}>
-                
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => updateSwitchData(4)}
+                className={`${getSelectionMode === 4 ? "mt-0" : "mt-4"} 
+                flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center 
+                ${getSelectionMode === 4 ? "bg-purple-500" : "bg-purple-200"}`}
+            >
                 <Text
-                style={{color: getSelectionMode == 4 ? 'white' : 'white', fontSize: getSelectionMode == 4 ?14:10}}>
-                    {option4}</Text>
+                    className={`${getSelectionMode === 4 ? "text-white" : "text-white"} 
+                    ${getSelectionMode === 4 ? "text-sm" : "text-xs"}`}
+                >
+                    {option4}
+                </Text>
             </TouchableOpacity>
         </View>
     )
-
 }

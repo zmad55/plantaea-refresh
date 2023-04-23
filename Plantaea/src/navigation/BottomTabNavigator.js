@@ -22,15 +22,15 @@ export default function BottomTabNavigator() {
         tabBarIcon: ({ focused, size }) => {
           let iconName;
           if (route.name === 'Home_Stack') {
-            iconName = 'home-outline';
+            iconName = 'home';
           } else if (route.name === 'Map_Stack') {
-            iconName = 'map-outline';
+            iconName = 'game-controller';
           } else if (route.name === 'Plant Library_Stack') {
-            iconName = 'leaf-outline';
+            iconName = 'library';
           } else if (route.name === 'User Profile_Stack') {
-            iconName = 'person-outline';
+            iconName = 'person';
           }
-          return <Ionicons name={iconName} size={25} color={focused ? "green" : "black"} />;
+          return <Ionicons name={iconName} size={25} color={focused ? "green" : "grey"} />;
         },
       })}
     >
