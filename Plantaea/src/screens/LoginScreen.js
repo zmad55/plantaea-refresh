@@ -11,7 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { userLogin } from './../../redux/actions/authActions';
+import { userLogin } from '../../redux/actions';
 import { storeData, getData } from "./../../redux/asyncStorage"
 
 export default function LoginScreen() {
@@ -40,7 +40,7 @@ export default function LoginScreen() {
             <View className="px-8">
                 <View style={{ alignItems: 'center' }}>
                     <Image
-                        source={require('../assets/images/plant-library-icon.png')}
+                        source={require('../assets/images/library-icon.png')}
                         resizeMode="contain"
                         style={{ width: 80, height: 80 }}
                     />

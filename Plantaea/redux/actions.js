@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { storeData, getData } from "./../asyncStorage"
+import { storeData, getData } from "./asyncStorage"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
 
-const backEndURL = `http://10.0.2.2:4000/api/user`
+const backEndURL = `http://192.168.1.6:4000/api/user`
 
 export const userLogin = createAsyncThunk(
     'auth/login',

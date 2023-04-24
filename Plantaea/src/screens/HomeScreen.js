@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, StatusBar, Pla
 import Feather from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from "react-native";
 import CustomImageSlider from '../components/CustomImageSlider';
+import React, { useState, useEffect } from 'react';
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -11,18 +12,24 @@ const HomeScreen = ({ navigation }) => {
                     <View className='flex-1'>
                         <Text className='m-2 p-2 text-2xl font-bold text-teal-800'>Hello Name</Text>
                     </View>
+                    <View className="flex-1 items-center">
+                        <Image
+                            source={require('../../assets/images/plantaea-logo.png')}
+                            resizeMode="contain"
+                            style={{ width: 80, height: 80 }}
+                        />
+                        <Text className="font-bold text-3xl text-teal-800 mb-4">PLANTAEA</Text>
+                    </View>
                     <TouchableOpacity
-                        className="bg-white flex-row items-center border border-blue-200 rounded-lg px-5 py-2 mt-2 mb-5 mx-4"
+                        className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-1 mb-1 mx-5"
                         onPress={() => navigation.navigate('PlantLibraryStack')}
                     >
                         <Feather name="search" size={20} color="#1C4C4E" style={{ marginRight: 5 }} />
-                        <Text style={{ flex: 1, paddingTop: 2, paddingRight: 10, paddingBottom: 2, paddingLeft: 0, color: '#1C4C4E' }}>Search</Text>
+                        <Text className="flex-1 pt-2 pr-12 pb-2 pl-2 text-gray-500">Search</Text>
                     </TouchableOpacity>
-                    <View className="h-1 bg-gray-300 my-1 mx-4" />
                     <View className="flex-1 justify-center bg-white ">
                         <CustomImageSlider />
                     </View>
-                    <View className="h-1 bg-gray-300 my-1 mx-4" />
                     <View className='flex-row justify-center'>
                         <View className='p-1 m-2 w-40 h-75 rounded-lg bg-gray-200 shadow-md'>
                             <TouchableOpacity onPress={() => navigation.navigate('PlantLibraryStack')} >
