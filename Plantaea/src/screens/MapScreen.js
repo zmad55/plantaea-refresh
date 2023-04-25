@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { plantListLibrary } from '../data/data';
+import { plantListLibrary } from '../data/plantData';
 import { getLocation } from '../permissions/locationPermission'
 
 const MapScreen = ({ navigation }) => {

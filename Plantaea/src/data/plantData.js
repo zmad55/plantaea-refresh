@@ -1,3 +1,5 @@
+// Soon to be received from server side
+
 export const plantListLibrary = [
     {
         id: '1',

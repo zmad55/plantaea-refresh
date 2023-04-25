@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TextInput, StyleSheet, Image, ImageBackground } from 'react-native'
 
 import Feather from 'react-native-vector-icons/Feather'
-import ListItem from '../components/ListItem'
+import ListItem from '../components/PlantListItem'
 import CustomSwitchLibrary from "../components/CustomSwitchLibrary";
-import { plantListLibrary } from '../data/data'
+import { plantListLibrary } from '../data/plantData'
 
 const PlantLibrary = ({ navigation, route }) => {
 
@@ -21,7 +21,7 @@ const PlantLibrary = ({ navigation, route }) => {
       localName={item.localName}
       category={item.category}
       onPress={() =>
-        navigation.navigate("PlantDetails", {
+        navigation.navigate("Plant Details", {
           image: item.image,
           scientificName: item.scientificName,
           localName: item.localName,
@@ -36,7 +36,6 @@ const PlantLibrary = ({ navigation, route }) => {
   );
 
   return (
-    <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
       <SafeAreaView className="flex-1">
         <View className="overflow-hidden">
           <SafeAreaView className="bg-white items-center shadow-2xl">
@@ -91,7 +90,6 @@ const PlantLibrary = ({ navigation, route }) => {
           <View className="padding-2 border-t-1 border-t-white mt-20" />
         </ScrollView>
       </SafeAreaView >
-    </View>
   )
 }
 

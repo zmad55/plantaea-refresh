@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+        // <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
             <SafeAreaView className='flex-1'>
                 <ScrollView className='bg-white'>
                     <View className='flex-1'>
@@ -57,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                 </ScrollView>
             </SafeAreaView>
-        </View>
+        // </View>
     );
 }
 

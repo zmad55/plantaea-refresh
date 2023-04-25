@@ -6,10 +6,12 @@ import Feather from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomSwitch from "../components/CustomSwitch";
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import * as Animatable from 'react-native-animatable';
 
-const MIN_HEIGHT = 55;
+const MIN_HEIGHT = 70;
 const MAX_HEIGHT = 350;
 
 const PlantDetailsScreen = ({ navigation, route }) => {
@@ -22,54 +24,52 @@ const PlantDetailsScreen = ({ navigation, route }) => {
   }
 
   return (
-
-    <View style={styles.container}>
+    <View className="flex-1">
       <StatusBar barStyle='light-content' />
       <ImageHeaderScrollView
         maxHeight={MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         maxOverlayOpacity={0.6}
-        minOverlayOpacity={0.3}
+        minOverlayOpacity={0.4}
         renderHeader={() => (
-          <Image source={route.params?.image} style={{ width: windowWidth, height: 400 }} />
+          <Image source={route.params?.image} className="w-screen h-100" />
         )}
 
         renderForeground={() => (
-          <View style={styles.titleContainer}>
-            <Text style={styles.imageTitle}>{route.params?.localName}</Text>
-            <Text style={{ fontStyle: 'italic', color: 'white' }}>{route.params?.scientificName}</Text>
+          <View className="flex-1 align-stretch justify-center items-center">
+            <Text className="text-3xl font-bold text-white">{route.params?.localName}</Text>
+            <Text className="italic text-white align-center">{route.params?.scientificName}</Text>
+          </View>
+        )}
+        renderFixedForeground={() => (
+          <View>
+            <TouchableOpacity className="relative top-3 left-3 z-590 w-12 h-12 rounded-full bg-white items-center justify-center"
+              onPress={() => navigation.navigate('Plant Library')}>
+              <MaterialCommunityIcons name="arrow-left-bold-circle" size={40} color="green" />
+            </TouchableOpacity>
+            <Animatable.View className="h-1/4 justify-center items-center pt-40 opacity-0" ref={navTitleView}>
+              <Text className="text-white text-base bg-transparent">{route.params?.localName}</Text>
+            </Animatable.View>
           </View>
         )}
 
-        renderFixedForeground={() => (
-          <Animatable.View style={styles.navTitleView} ref={navTitleView}>
-            <Text style={styles.navTitle}>{route.params?.localName}</Text>
-          </Animatable.View>
-
-        )}
       >
-        <SafeAreaView style={{ padding: 10, backgroundColor: 'white' }}>
+        <SafeAreaView className="p-2.5 bg-white mb-2.5">
           <TriggeringView
-            style={styles.section}
             onHide={() => navTitleView.current.fadeInUp(200)}
             onDisplay={() => navTitleView.current.fadeOut(100)}
           >
-            <Text style={styles.title}>Description</Text>
           </TriggeringView>
+          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Description</Text>
+          <Text className="p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.description}</Text>
+          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Use</Text>
+          <Text className="p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.use}</Text>
+          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Taxonomy</Text>
 
-          <Text style={styles.section}>{route.params?.description}</Text>
-          <Text style={[styles.title, styles.section]}>Use</Text>
-          <Text style={styles.section}>{route.params?.use}</Text>
-          <Text style={[styles.title, styles.section]}>Taxonomy</Text>
-          <Text style={[styles.section, { fontSize: 10 }]}>{route.params?.taxonomy}</Text>
+          <Text className="text-xs p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.taxonomy}</Text>
         </SafeAreaView>
-
       </ImageHeaderScrollView>
     </View>
-
-
-
-
 
     // <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
     //     <View>
@@ -112,80 +112,3 @@ const PlantDetailsScreen = ({ navigation, route }) => {
 }
 
 export default PlantDetailsScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    height: MAX_HEIGHT,
-    width: windowWidth,
-    alignSelf: 'stretch',
-    resizeMode: 'cover',
-  },
-  title: {
-    fontSize: 20,
-  },
-  name: {
-    fontWeight: 'bold',
-  },
-  section: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-    backgroundColor: 'white',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  sectionContent: {
-    fontSize: 16,
-    textAlign: 'justify',
-  },
-  categories: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
-  },
-  categoryContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#FF6347',
-    borderRadius: 20,
-    margin: 10,
-    padding: 10,
-    paddingHorizontal: 15,
-  },
-  category: {
-    fontSize: 14,
-    color: '#fff',
-    marginLeft: 10,
-  },
-  titleContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageTitle: {
-    color: 'white',
-    backgroundColor: 'transparent',
-    fontSize: 24,
-  },
-  navTitleView: {
-    height: MIN_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: Platform.OS === 'ios' ? 40 : 5,
-    opacity: 0,
-  },
-  navTitle: {
-    color: 'white',
-    fontSize: 18,
-    backgroundColor: 'transparent',
-  },
-  sectionLarge: {
-    minHeight: 300,
-  },
-});
