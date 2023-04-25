@@ -12,6 +12,29 @@ const PlantLibrary = ({ navigation, route }) => {
   const onSelectSwitch = (value) => {
     setDescriptionTab(value);
   }
+
+  const renderPlantListItem = (item) => (
+    <ListItem
+      key={item.id}
+      image={item.image}
+      scientificName={item.scientificName}
+      localName={item.localName}
+      category={item.category}
+      onPress={() =>
+        navigation.navigate("PlantDetails", {
+          image: item.image,
+          scientificName: item.scientificName,
+          localName: item.localName,
+          description: item.description,
+          use: item.use,
+          taxonomy: item.taxonomy,
+          category: item.category,
+          id: item.id,
+        })
+      }
+    />
+  );
+
   return (
     <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
       <SafeAreaView className="flex-1">
@@ -43,49 +66,28 @@ const PlantLibrary = ({ navigation, route }) => {
           </SafeAreaView>
         </View>
         <ScrollView className="px-4 py-5 mt-0">
-          {descriptionTab == 1 &&
+          {descriptionTab === 1 && <View>{plantListLibrary.map(renderPlantListItem)}</View>}
+          {descriptionTab === 2 && (
             <View>
-              {plantListLibrary.map(item => (
-                <ListItem key={item.id} image={item.image} scientificName={item.scientificName} localName={item.localName} category={item.category}
-                  onPress={() => navigation.navigate('PlantDetails', { image: item.image, scientificName: item.scientificName, localName: item.localName, description: item.description, use: item.use, taxonomy: item.taxonomy, category: item.category, id: item.id })} />
-              ))
-              }
+              {plantListLibrary
+                .filter((item) => item.category[0] === "medicine")
+                .map(renderPlantListItem)}
             </View>
-          }
-          {descriptionTab == 2 &&
+          )}
+          {descriptionTab === 3 && (
             <View>
-              {plantListLibrary.map(item => (
-                item.category[0] == 'medicine' ?
-                  <ListItem key={item.id} image={item.image} scientificName={item.scientificName} localName={item.localName} category={item.category}
-                    onPress={() => navigation.navigate('PlantDetails', { image: item.image, scientificName: item.scientificName, localName: item.localName, description: item.description, use: item.use, taxonomy: item.taxonomy, category: item.category, id: item.id })} />
-                  : null
-              ))
-              }
+              {plantListLibrary
+                .filter((item) => item.category.includes("consumable"))
+                .map(renderPlantListItem)}
             </View>
-          }
-          {descriptionTab == 3 &&
+          )}
+          {descriptionTab === 4 && (
             <View>
-              {plantListLibrary.map(item => (
-                item.category[0] == 'consumable' || item.category[1] == 'consumable' ?
-                  <ListItem key={item.id} image={item.image} scientificName={item.scientificName} localName={item.localName} category={item.category}
-                    onPress={() => navigation.navigate('PlantDetails', { image: item.image, scientificName: item.scientificName, localName: item.localName, description: item.description, use: item.use, taxonomy: item.taxonomy, category: item.category, id: item.id })} />
-                  : null
-              ))
-              }
+              {plantListLibrary
+                .filter((item) => item.category.includes("ornamental"))
+                .map(renderPlantListItem)}
             </View>
-          }
-          {descriptionTab == 4 &&
-            <View>
-              {plantListLibrary.map(item => (
-                item.category[0] == 'ornamental' || item.category[1] == 'ornamental' || item.category[2] == 'ornamental' ?
-                  <ListItem key={item.id} image={item.image} scientificName={item.scientificName} localName={item.localName} category={item.category}
-                    onPress={() => navigation.navigate('PlantDetails', { image: item.image, scientificName: item.scientificName, localName: item.localName, description: item.description, use: item.use, taxonomy: item.taxonomy, category: item.category, id: item.id })} />
-                  : null
-              ))
-              }
-            </View>
-          }
-
+          )}
           <View className="padding-2 border-t-1 border-t-white mt-20" />
         </ScrollView>
       </SafeAreaView >

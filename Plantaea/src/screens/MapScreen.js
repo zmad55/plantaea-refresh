@@ -96,7 +96,6 @@ const MapScreen = ({ navigation }) => {
                       ${showMarkers === option.label ?
                           'brightness-50' : 'opacity-30'
                         }`} />
-                    {/* <RadioButton value={option.value} color={option.color} status={showMarkers === option.value ? 'checked' : 'unchecked'} /> */}
                   </TouchableOpacity>
                 ))}
               </RadioButton.Group>
