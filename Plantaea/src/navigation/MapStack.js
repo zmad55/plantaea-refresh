@@ -1,10 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import MapScreen from '../screens/MapScreen';
+
+const Stack = createStackNavigator();
 
 export default function MapStack() {
   return (
-    <View>
-      <Text>MapStack</Text>
-    </View>
-  )
+    <Stack.Navigator>
+      <Stack.Screen name="Map" component={MapScreen} options={}/>
+      {/* <Stack.Screen name="Plant Details" component={PlantDetailsScreen} options={{ headerShown: false }}/> */}
+    </Stack.Navigator>
+  );
 }

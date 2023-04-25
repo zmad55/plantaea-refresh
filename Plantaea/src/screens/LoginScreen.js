@@ -40,7 +40,7 @@ export default function LoginScreen() {
             <View className="px-8">
                 <View style={{ alignItems: 'center' }}>
                     <Image
-                        source={require('../assets/images/library-icon.png')}
+                        source={require('../assets/images/plantaea-logo.png')}
                         resizeMode="contain"
                         style={{ width: 80, height: 80 }}
                     />

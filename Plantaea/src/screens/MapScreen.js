@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import * as Location from 'expo-location';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { PlantsLocation } from '../data/IndigenousPlantsLocation';
+import { plantListLibrary } from '../data/data';
+import { getLocation } from '../permissions/locationPermission'
 
-const PlantLibrary = ({ navigation, route }) => {
+const MapScreen = ({ navigation }) => {
   const [mapRegion, setMapRegion] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
@@ -16,50 +16,47 @@ const PlantLibrary = ({ navigation, route }) => {
     longitudeDelta: 0.0421,
   });
 
-  const userLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      setErrorMsg('Permission to access location was denied');
-    }
-    let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+  const handleGetLocation = async () => {
+    const location = await getLocation();
+
     setMapRegion({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
       // latitudeDelta: 0.0822
       latitudeDelta: 0.01,
       longitudeDelta: 0.002,
     });
-    console.log(location.coords.latitude, location.coords.longitude);
-  }
+    console.log(location.latitude, location.longitude);
+  };
 
   useEffect(() => {
-    userLocation();
+    handleGetLocation()
   }, []);
 
-  function listDownType(PlantsLocation) {
+  function listDownType(plantListLibrary) {
     const uniqueType = ["Medicinal"]
-    for (let i = 0; i < PlantsLocation.length; i++) {
-      uniqueType.push(PlantsLocation[i].type)
+    for (let i = 0; i < plantListLibrary.length; i++) {
+      uniqueType.push(plantListLibrary[i].type)
     }
     const uniqueArray = [...new Set(uniqueType)]
     return uniqueArray
   }
-  const lastArray = listDownType(PlantsLocation)
+  const lastArray = listDownType(plantListLibrary)
 
-  function filterType(PlantsLocation, userInput) {
+  function filterType(plantListLibrary, userInput) {
     const plantType = []
-    for (let i = 0; i < PlantsLocation.length; i++) {
-      if (PlantsLocation[i].type == userInput)
-        plantType.push(PlantsLocation[i])
+    for (let i = 0; i < plantListLibrary.length; i++) {
+      if (plantListLibrary[i].type == userInput)
+        plantType.push(plantListLibrary[i])
     }
     return plantType
   }
 
   const options = [
-    { label: 'All', value: 'All', materialIcon_name: 'check-all', color: '#2196F3' },
-    { label: 'Medicinal', value: 'Medicinal', materialIcon_name: '../../assets/images/medicine_marker.png', color: '#4CAF50' },
-    { label: 'Consumable', value: 'Consumable', materialIcon_name: 'food-apple', color: '#FFC107' },
-    { label: 'Ornament', value: 'Ornament', materialIcon_name: 'ornament', color: '#FFA000' },
+    { label: 'All', value: 'All', materialIcon_name: '../../assets/images/plant_marker.png', img: require('../../assets/images/plant_marker.png'), color: '#2196F3' },
+    { label: 'Medicine', value: 'Medicine', materialIcon_name: '../../assets/images/medicine_marker.png', img: require('../../assets/images/medicine_marker.png'), color: '#4CAF50' },
+    { label: 'Consumable', value: 'Consumable', materialIcon_name: '../../assets/images/food_marker.png', img: require('../../assets/images/food_marker.png'), color: '#FFC107' },
+    { label: 'Ornamental', value: 'Ornamental', materialIcon_name: '../../assets/images/home_marker.png', img: require('../../assets/images/home_marker.png'), color: '#FFA000' },
   ];
 
   const [showMarkers, setShowMarker] = useState(options[0].value);
@@ -86,243 +83,234 @@ const PlantLibrary = ({ navigation, route }) => {
             <MaterialCommunityIcons name={isExpanded ? "close" : "filter"} size={35} color="green" />
           </TouchableOpacity>
           {isExpanded && (
-            <View className="bg-white rounded-lg shadow-lg py-4 px-3 mt-4">
+            <View className="bg-white rounded-2xl px-2 py-4 mt-3">
               <RadioButton.Group onValueChange={typeSelect} value={showMarkers}>
                 {options.map((option, index) => (
                   <TouchableOpacity
                     key={index}
-                    className="flex flex-row items-center space-x-3"
+                    className="flex-col items-center py-3"
                     onPress={() => typeSelect(option.value)}
                   >
-                    <Image source = {require(option.materialIcon_name)} style={{height: 35, width:35 }}/>
-                    {/* <MaterialCommunityIcons name={option.materialIcon_name} size={25} color={option.color} /> */}
-                    <RadioButton value={option.value} color={option.color} status={showMarkers === option.value ? 'checked' : 'unchecked'} />
+                    <Image source={option.img}
+                      className={`w-7 h-7 rounded-full flex items-center justify-center border-2 
+                      ${showMarkers === option.label ?
+                          'brightness-50' : 'opacity-30'
+                        }`} />
+                    {/* <RadioButton value={option.value} color={option.color} status={showMarkers === option.value ? 'checked' : 'unchecked'} /> */}
                   </TouchableOpacity>
                 ))}
               </RadioButton.Group>
             </View>
           )}
         </View>
-        {/* <View style={styles.filterContainer}>
-          <View style={{ borderBottomWidth: 1, }}>
-            <Text style={{ textAlign: "center" }}>
-              FIlter
-            </Text>
-          </View>
-          <View>
-            <TouchableOpacity onPress={() => typeSelect("All")}>
-              <Text>All</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => typeSelect("Medicinal")}>
-              <Text>Medicinal</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => typeSelect("Food")}>
-              <Text>Food</Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
         <MapView
-          style={styles.map}
+          className="w-screen h-screen"
           initialRegion={{
             latitude: 17.3513,
             longitude: 121.1719,
             latitudeDelta: 0,
-            longitudeDelta: 2
+            longitudeDelta: 1.9
           }}
         >
+          <Marker coordinate={mapRegion} title='You are here!' />
+          {plantListLibrary.filter(item => {
+            if (showMarkers === "All") return true;
+            if (showMarkers === "Medicine" && item.category[0] === "medicine") return true;
+            if (showMarkers === "Consumable" && (item.category[0] === "consumable" || item.category[1] === "consumable")) return true;
+            if (showMarkers === "Ornamental" && (item.category[0] === "ornamental" || item.category[1] === "ornamental" || item.category[2] === "ornamental")) return true;
+            return false;
+          }).map(item => (
+            <Marker
+              title={item.localName}
+              coordinate={{
+                latitude: item.latitude,
+                longitude: item.longitude
+              }}
+              key={item.id}
+            >
+              {showMarkers === "All" && <Image source={require('../../assets/images/plant_marker.png')} className="h-10 w-10" />}
+              {showMarkers === "Medicine" && <Image source={require('../../assets/images/medicine_marker.png')} className="h-10 w-10" />}
+              {showMarkers === "Consumable" && <Image source={require('../../assets/images/food_marker.png')} className="h-10 w-10" />}
+              {showMarkers === "Ornamental" && <Image source={require('../../assets/images/home_marker.png')} className="h-10 w-10" />}
+              <Callout
+                tooltip
+                onPress={() => navigation.navigate('PlantDetails',
+                  {
+                    image: item.image,
+                    scientificName: item.scientificName,
+                    localName: item.localName,
+                    description: item.description,
+                    use: item.use,
+                    taxonomy: item.taxonomy,
+                    category: item.category,
+                    id: item.id
+                  })}>
+                <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                  <Text className="font-2 font-semibold">{item.localName}</Text>
+                  <Text><Image className="w-28 h-28 rounded-lg" source={item.image} /></Text>
+                </View>
+                <View className="bg-transparent border-transparent border-t-white border-8 self-center mb-4" />
+              </Callout>
+            </Marker>
+          ))}
+        </MapView>
+        {/* <MapView
+          className="w-screen h-screen"
+          initialRegion={{
+            latitude: 17.3513,
+            longitude: 121.1719,
+            latitudeDelta: 0,
+            longitudeDelta: 1.9
+          }}
+        >
+          <Marker coordinate={mapRegion} title='You are here!' />
           {showMarkers === "All" &&
             <View>
-              {PlantsLocation.map(item => (
-                item.type == "Medicinal" ?
-                  <Marker
-                    title={item.name}
-                    coordinate={{
-                      latitude: item.latitude,
-                      longitude: item.longitude
-                    }}
-                    key={item.id}
-                  >
-                    <Image source={require('../../assets/images/medicine_marker.png')} style={{ height: 35, width: 35 }} />
-                    <Callout
-                      tooltip
-                      onPress={() => navigation.navigate('PlantDetails',
-                        {
-                          image: item.image,
-                          name: item.name,
-                          description: item.description,
-                          type: item.type,
-                          id: item.id
-                        })}>
-                      <View style={styles.bubble}>
-                        <Text style={styles.name}>{item.name}</Text>
-                        <Text style={{ bottom: 40, marginBottom: -30 }}><Image style={{ width: 100, height: 100 }} source={item.image} /></Text>
-                      </View>
-                      <View style={styles.arrowBorder} />
-                      <View style={styles.arrow} />
-                    </Callout>
-                  </Marker> :
-                  <Marker
-                    title={item.name}
-                    coordinate={{
-                      latitude: item.latitude,
-                      longitude: item.longitude
-                    }}
-                    key={item.id}
-                  >
-                    <Image source={require('../../assets/images/food_marker.png')} style={{ height: 35, width: 35 }} />
-                    <Callout
-                      tooltip
-                      onPress={() => navigation.navigate('PlantDetails',
-                        {
-                          image: item.image,
-                          name: item.name,
-                          description: item.description,
-                          type: item.type,
-                          id: item.id
-                        })}>
-                      <View style={styles.bubble}>
-                        <Text style={styles.name}>{item.name}</Text>
-                        <Text style={{ bottom: 40, marginBottom: -30 }}><Image style={{ width: 100, height: 100 }} source={item.image} /></Text>
-                      </View>
-                      <View style={styles.arrowBorder} />
-                      <View style={styles.arrow} />
-                    </Callout>
-                  </Marker>
+              {plantListLibrary.map(item => (
+                <Marker
+                  title={item.localName}
+                  coordinate={{
+                    latitude: item.latitude,
+                    longitude: item.longitude
+                  }}
+                  key={item.id}
+                >
+                  <Image source={require('../../assets/images/plant_marker.png')} className="h-10 w-10" />
+                  <Callout
+                    tooltip
+                    onPress={() => navigation.navigate('PlantDetails',
+                      {
+                        image: item.image,
+                        scientificName: item.scientificName,
+                        localName: item.localName,
+                        description: item.description,
+                        use: item.use,
+                        taxonomy: item.taxonomy,
+                        category: item.category,
+                        id: item.id
+                      })}>
+                    <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                      <Text className="font-2 font-semibold">{item.localName}</Text>
+                      <Text><Image className="w-28 h-28 rounded-lg" source={item.image} /></Text>
+                    </View>
+                    <View className="bg-transparent border-transparent border-t-white border-8 self-center mb-4" />
+                  </Callout>
+                </Marker>
               ))}
             </View>
           }
-          {showMarkers === "Medicinal" &&
+          {showMarkers === "Medicine" &&
             <View>
-              {PlantsLocation.map(item => (
-                item.type == "Medicinal" ?
+              {plantListLibrary.map(item => (
+                item.category[0] == 'medicine' ?
                   <Marker
-                    title={item.name}
+                    title={item.localName}
                     coordinate={{
                       latitude: item.latitude,
                       longitude: item.longitude
                     }}
                     key={item.id}
                   >
-                    <Image source={require('../../assets/images/medicine_marker.png')} style={{ height: 35, width: 35 }} />
+                    <Image source={require('../../assets/images/medicine_marker.png')} className="h-10 w-10" />
                     <Callout
                       tooltip
                       onPress={() => navigation.navigate('PlantDetails',
                         {
                           image: item.image,
-                          name: item.name,
+                          scientificName: item.scientificName,
+                          localName: item.localName,
                           description: item.description,
-                          type: item.type,
+                          use: item.use,
+                          taxonomy: item.taxonomy,
+                          category: item.category,
                           id: item.id
                         })}>
-                      <View style={styles.bubble}>
-                        <Text style={styles.name}>{item.name}</Text>
-                        <Text style={{ bottom: 40, marginBottom: -30 }}><Image style={{ width: 100, height: 100 }} source={item.image} /></Text>
+                      <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                        <Text className="font-2 font-semibold">{item.localName}</Text>
+                        <Text><Image className="w-28 h-28 rounded-lg" source={item.image} /></Text>
                       </View>
-                      <View style={styles.arrowBorder} />
-                      <View style={styles.arrow} />
+                      <View className="bg-transparent border-transparent border-t-white border-8 self-center mb-4" />
                     </Callout>
                   </Marker> : null
               ))}
             </View>
           }
-          {showMarkers === "Food" &&
+          {showMarkers === "Consumable" &&
             <View>
-              {PlantsLocation.map(item => (
-                item.type == "Food" ?
+              {plantListLibrary.map(item => (
+                item.category[0] == 'consumable' || item.category[1] == 'consumable' ?
                   <Marker
-                    title={item.name}
+                    title={item.localName}
                     coordinate={{
                       latitude: item.latitude,
                       longitude: item.longitude
                     }}
                     key={item.id}
                   >
-                    <Image source={require('../../assets/images/food_marker.png')} style={{ height: 35, width: 35 }} />
+                    <Image source={require('../../assets/images/food_marker.png')} className="h-10 w-10" />
                     <Callout
                       tooltip
                       onPress={() => navigation.navigate('PlantDetails',
                         {
                           image: item.image,
-                          name: item.name,
+                          scientificName: item.scientificName,
+                          localName: item.localName,
                           description: item.description,
-                          type: item.type,
+                          use: item.use,
+                          taxonomy: item.taxonomy,
+                          category: item.category,
                           id: item.id
                         })}>
-                      <View style={styles.bubble}>
-                        <Text style={styles.name}>{item.name}</Text>
-                        <Text style={{ bottom: 40, marginBottom: -30 }}><Image style={{ width: 100, height: 100 }} source={item.image} /></Text>
+                      <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                        <Text className="font-2 font-semibold">{item.localName}</Text>
+                        <Text><Image className="w-28 h-28 rounded-lg" source={item.image} /></Text>
                       </View>
-                      <View style={styles.arrowBorder} />
-                      <View style={styles.arrow} />
+                      <View className="bg-transparent border-transparent border-t-white border-8 self-center mb-4" />
                     </Callout>
                   </Marker> : null
               ))}
-
             </View>
           }
-        </MapView>
+          {showMarkers === "Ornamental" &&
+            <View>
+              {plantListLibrary.map(item => (
+                item.category[0] == 'ornamental' || item.category[1] == 'ornamental' || item.category[2] == 'ornamental' ?
+                  <Marker
+                    title={item.localName}
+                    coordinate={{
+                      latitude: item.latitude,
+                      longitude: item.longitude
+                    }}
+                    key={item.id}
+                  >
+                    <Image source={require('../../assets/images/home_marker.png')} className="h-10 w-10" />
+                    <Callout
+                      tooltip
+                      onPress={() => navigation.navigate('PlantDetails',
+                        {
+                          image: item.image,
+                          scientificName: item.scientificName,
+                          localName: item.localName,
+                          description: item.description,
+                          use: item.use,
+                          taxonomy: item.taxonomy,
+                          category: item.category,
+                          id: item.id
+                        })}>
+                      <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                        <Text className="font-2 font-semibold">{item.localName}</Text>
+                        <Text><Image className="w-28 h-28 rounded-lg" source={item.image} /></Text>
+                      </View>
+                      <View className="bg-transparent border-transparent border-t-white border-8 self-center mb-4" />
+                    </Callout>
+                  </Marker> : null
+              ))}
+            </View>
+          }
+        </MapView> */}
       </View>
     </SafeAreaView>
   );
 }
 
-export default PlantLibrary
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  filterContainer: {
-    position: "absolute",
-    zIndex: 1,
-    bottom: 10,
-    right: 10,
-    width: '20%',
-    height: "12%",
-    borderColor: "Black",
-    borderWidth: 1,
-    backgroundColor: "white",
-  },
-  textStyle: {
-    paddingLeft: 5,
-  },
-  bubble: {
-    width: 150,
-    flexDirection: "column",
-    alignSelf: "flex-start",
-    backgroundColor: "#fff",
-    borderRadius: 6,
-    borderWidth: 0.5,
-    padding: 15,
-    borderColor: "#ccc"
-  },
-  name: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  arrow: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#fff",
-    borderWidth: 16,
-    alignSelf: "center",
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#007a87",
-    borderWidth: 16,
-    alignSelf: "center",
-    marginTop: -0.5,
-  },
-  image: {
-    widht: 120,
-    height: 80,
-  },
-});
-
+export default MapScreen;

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeStack from './HomeStack';
-import MapScreen from '../screens/MapScreen';
+import DailiesScreen from '../screens/DailiesScreen';
 import CameraScreen from '../screens/CameraScreen';
 import PlantLibraryStack from './PlantLibraryStack';
 import UserProfileStack from './UserProfileStack';
@@ -35,7 +35,7 @@ export default function BottomTabNavigator() {
       })}
     >
       <Tab.Screen name="Home_Stack" component={HomeStack} />
-      <Tab.Screen name="Map_Stack" component={MapScreen} />
+      <Tab.Screen name="Map_Stack" component={DailiesScreen} options={{ tabBarStyle: "none" }}/>
       <Tab.Screen name="Camera_Stack"
         component={CameraScreen}
         options={{
