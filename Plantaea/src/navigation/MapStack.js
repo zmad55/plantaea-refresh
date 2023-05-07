@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function MapStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }}/>
       {/* <Stack.Screen name="Plant Details" component={PlantDetailsScreen} options={{ headerShown: false }}/> */}
     </Stack.Navigator>
   );

@@ -4,11 +4,13 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Location from 'expo-location';
+import { DepartmentOfAgriculture } from '../data/carDOA';
 
-import { plantListLibrary } from '../data/plantData';
+import { plantListLibrary,MarketListLibrary } from '../data/plantData';
 import { getLocation } from '../permissions/locationPermission'
 
-const MapScreen = ({ navigation }) => {
+const MapScreen = ({ navigation, route }) => {
   const [mapRegion, setMapRegion] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
@@ -16,21 +18,24 @@ const MapScreen = ({ navigation }) => {
     longitudeDelta: 0.0421,
   });
 
-  const handleGetLocation = async () => {
-    const location = await getLocation();
-
+  const getUserLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+    }
+    let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
     setMapRegion({
-      latitude: location.latitude,
-      longitude: location.longitude,
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
       // latitudeDelta: 0.0822
       latitudeDelta: 0.01,
       longitudeDelta: 0.002,
     });
-    console.log(location.latitude, location.longitude);
-  };
+    console.log(location.coords.latitude, location.coords.longitude);
+  }
 
   useEffect(() => {
-    handleGetLocation()
+    getUserLocation();
   }, []);
 
   function listDownType(plantListLibrary) {
@@ -57,6 +62,7 @@ const MapScreen = ({ navigation }) => {
     { label: 'Medicine', value: 'Medicine', materialIcon_name: '../../assets/images/medicine_marker.png', img: require('../../assets/images/medicine_marker.png'), color: '#4CAF50' },
     { label: 'Consumable', value: 'Consumable', materialIcon_name: '../../assets/images/food_marker.png', img: require('../../assets/images/food_marker.png'), color: '#FFC107' },
     { label: 'Ornamental', value: 'Ornamental', materialIcon_name: '../../assets/images/home_marker.png', img: require('../../assets/images/home_marker.png'), color: '#FFA000' },
+    { label: 'Office', value: 'Office', materialIcon_name: '../../assets/images/bldg_marker.png', img: require('../../assets/images/bldg_marker.png'), color: '#B02001' },
   ];
 
   const [showMarkers, setShowMarker] = useState(options[0].value);
@@ -71,13 +77,24 @@ const MapScreen = ({ navigation }) => {
     setIsExpanded(!isExpanded);
   };
 
+  const mapRef = useRef(null);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+
+  useEffect(() => {
+    console.log('markerId:', route.params?.markerId);
+    const markerId = route.params?.markerId
+    if (markerId) {
+      const marker = plantListLibrary.find(m => m.id === markerId);
+      if (marker) {
+        setSelectedMarker(marker);
+        mapRef.current?.animateToRegion(marker.coordinate);
+      }
+    }
+  }, [navigation]);
+
   return (
     <SafeAreaView>
       <View>
-        <TouchableOpacity className="absolute top-3 left-3 z-50 w-12 h-12 rounded-full bg-white items-center justify-center"
-          onPress={() => navigation.navigate('Home')}>
-          <MaterialCommunityIcons name="arrow-left-bold-circle" size={40} color="green" />
-        </TouchableOpacity>
         <View className="absolute top-3 right-3 z-50">
           <TouchableOpacity className="w-12 h-12 rounded-full bg-white items-center justify-center" onPress={handlePress}>
             <MaterialCommunityIcons name={isExpanded ? "close" : "filter"} size={35} color="green" />
@@ -152,6 +169,22 @@ const MapScreen = ({ navigation }) => {
               </Callout>
             </Marker>
           ))}
+          {DepartmentOfAgriculture.map(item =>
+                <Marker
+                  title={item.departmentName}
+                  coordinate = {{latitude: item.latitude,
+                                 longitude: item.longitude}}
+                  key={item.id}
+                >
+                  <Image source = {require('../../assets/images/bldg_marker.png')} className="w-28 h-28 rounded-lg" />
+                  <Callout tooltip>
+                    <View className="w-32 flex-col items-center p-2 bg-white rounded-lg">
+                      <Text>{item.departmentName}</Text>
+                    </View>
+                  </Callout>
+                </Marker>)
+            }
+          
         </MapView>
         {/* <MapView
           className="w-screen h-screen"

@@ -23,13 +23,14 @@ export default function BottomTabNavigator() {
           let iconName;
           if (route.name === 'Home_Stack') {
             iconName = 'home';
-          } else if (route.name === 'Map_Stack') {
-            iconName = 'game-controller';
-          } else if (route.name === 'Plant Library_Stack') {
-            iconName = 'library';
-          } else if (route.name === 'User Profile_Stack') {
-            iconName = 'person';
-          }
+          } 
+          // else if (route.name === 'Map_Stack') {
+          //   iconName = 'game-controller';
+          // } else if (route.name === 'Plant Library_Stack') {
+          //   iconName = 'library';
+          // } else if (route.name === 'User Profile_Stack') {
+          //   iconName = 'person';
+          // }
           return <Ionicons name={iconName} size={25} color={focused ? "green" : "grey"} />;
         },
       })}

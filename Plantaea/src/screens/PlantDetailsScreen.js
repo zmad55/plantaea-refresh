@@ -43,10 +43,10 @@ const PlantDetailsScreen = ({ navigation, route }) => {
         )}
         renderFixedForeground={() => (
           <View>
-            <TouchableOpacity className="relative top-3 left-3 z-590 w-12 h-12 rounded-full bg-white items-center justify-center"
+            {/* <TouchableOpacity className="relative top-3 left-3 z-590 w-12 h-12 rounded-full bg-white items-center justify-center"
               onPress={() => navigation.navigate('Plant Library')}>
               <MaterialCommunityIcons name="arrow-left-bold-circle" size={40} color="green" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Animatable.View className="h-1/4 justify-center items-center pt-40 opacity-0" ref={navTitleView}>
               <Text className="text-white text-base bg-transparent">{route.params?.localName}</Text>
             </Animatable.View>

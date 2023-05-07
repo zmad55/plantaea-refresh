@@ -1,27 +1,58 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './../screens/HomeScreen';
-import MapScreen from './../screens/MapScreen';
-import CameraScreen from './../screens/CameraScreen';
+import MapStack from './MapStack';
+import CameraStack from './CameraStack';
+import LibraryStack from './PlantLibraryStack';
+
 
 const Stack = createStackNavigator();
 
-export default function HomeStack({navigation, route}) {
-  React.useLayoutEffect(() => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === "Map"){
-      navigation.setOptions({tabBarStyle: {display: 'none'}});
-    }else {
-        navigation.setOptions({tabBarStyle: {display: 'flex'}});
-    }
-}, [navigation, route]);
+export default function HomeStack({ navigation, route }) {
+  //   React.useLayoutEffect(() => {
+  //     const routeName = getFocusedRouteNameFromRoute(route);
+  //     if (routeName === "MapStack"){
+  //       navigation.setOptions({tabBarStyle: {display: 'none'}});
+  //     } else {
+  //         navigation.setOptions({tabBarStyle: {display: 'flex'}});
+  //     }
+  // }, [navigation, route]);
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }}/> 
-      <Stack.Screen name="Camera" component={CameraScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="CameraStack" component={CameraStack} options={{
+        headerShown: true,
+        title: '',
+        headerBackImage: () => (
+          <Ionicons
+            name="caret-back-circle-sharp"
+            size={40}
+            color='white'
+          />
+        ),
+        headerTransparent: true,
+      }} />
+      <Stack.Screen name="MapStack" component={MapStack}
+        options={{
+          headerShown: true,
+          title: '',
+          headerBackImage: () => (
+            <Ionicons
+              name="caret-back-circle-sharp"
+              size={40}
+              color='white'
+            />
+          ),
+          headerTransparent: true,
+        }} />
+      <Stack.Screen name="LibraryStack" component={LibraryStack}
+        options={{
+          headerShown: false
+        }} />
     </Stack.Navigator>
   );
 }
+
