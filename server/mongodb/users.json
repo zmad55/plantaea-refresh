@@ -1,14 +1,15 @@
 [{
   "_id": {
-    "$oid": "643ff0f1188b74fa25a37b69"
+    "$oid": "64401d0c770f167d6da7c0bf"
   },
-  "username": "testuser",
-  "password": "testpass"
+  "username": "testuser2",
+  "password": "$2b$10$mBAnvsNEDm5FULST08BcSuq2WFiAWEXF6Dl4JDMkgSJAH55mZjUe2",
+  "__v": 0
 },{
   "_id": {
-    "$oid": "64400c998cb07044aa78910d"
+    "$oid": "644236b95dbe3fdecefcf561"
   },
-  "username": "testuser1",
-  "password": "password",
+  "username": "testuser",
+  "password": "$2b$10$OypWkC9/UlZK1.ZJKnpBoufg9wn8Ee0VHb/ojqa7ioyQM1VIqUsVy",
   "__v": 0
 }]
