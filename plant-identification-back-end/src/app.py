@@ -17,7 +17,19 @@ def handle_form_submission():
 @app.route("/api/retrieve_topics", methods=["POST"])
 @cross_origin()
 def handle_retrieve_topics():
+    return None
     
+
+@app.route('/api/identify-plant', methods=['POST'])
+def process_image():
+    # Get the image data from the request payload
+    image_data = request.json.get('image')
+
+    # Perform processing on the image (e.g., decode from base64, process using image libraries)
+    # ...
+
+    # Return the processed image or any relevant response
+    return 'Image processed successfully'
 
 
 if __name__ == "__main__":
