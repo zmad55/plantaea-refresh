@@ -3,14 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import AuthStack from "./src/navigation/AuthStack";
 import { useSelector } from "react-redux";
-
 import useCustomFont from './src/constants/fonts'
 
 
 export default function Main() {
 
     const fontIsReady = useCustomFont()
-
     if (!fontIsReady) {
         console.log("Loading font")
     }

@@ -1,11 +1,3 @@
-from queue import Queue
-
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from datetime import datetime
-import re
-import time
 
 def scrape_article(url):
     response = requests.get(str(url))

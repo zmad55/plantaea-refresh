@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, StatusBar, Platform, ImageBackground } from 'react-native';
+import {  Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import React, { useState, useEffect } from 'react';
 
 

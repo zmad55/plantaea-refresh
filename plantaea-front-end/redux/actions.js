@@ -3,7 +3,8 @@ import { storeData, getData } from "./asyncStorage"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
 
-const backEndURL = `http://192.168.1.3:4000/api/user`
+const backEndURL = `http://192.168.100.176:4000/api/user`
+// const backEndURL = `http://192.168.1.3:4000/api/user`
 
 export const userLogin = createAsyncThunk(
     'auth/login',

@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Image, SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-paper';
-
 import InputField from '../components/InputField'
 import CustomButton from '../components/CustomButton'
-
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { userLogin } from '../../redux/actions';
 import { storeData, getData } from "./../../redux/asyncStorage"
 

@@ -21,6 +21,7 @@ def handle_retrieve_topics():
     
 
 @app.route('/api/identify-plant', methods=['POST'])
+@cross_origin()
 def process_image():
     # Get the image data from the request payload
     image_data = request.json.get('image')

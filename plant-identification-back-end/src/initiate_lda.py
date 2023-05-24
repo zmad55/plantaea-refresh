@@ -1,24 +1,4 @@
-import pandas as pd
-import nltk
-import re
-import numpy as np
-import gensim
-import pyLDAvis.gensim_models
-import pyLDAvis.gensim_models as gensimvis
-import json
 
-from multiprocessing import Process, Manager
-from collections import Counter
-from nltk.corpus import stopwords
-from gensim import corpora, models
-from gensim.models import CoherenceModel
-from collections import defaultdict
-
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-
-from baguio_mc import mc_navigate_scrape_website
-from baguio_news import bn_navigate_scrape_website
 
 
 def preprocess_text(text, threshold=2):

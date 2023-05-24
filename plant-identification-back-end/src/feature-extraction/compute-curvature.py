@@ -187,5 +187,4 @@ def get_int_histogram_values():
     flat_hist_int = np.array(int_hist).flatten()
     flat_hist_area = np.array(area_hist).flatten()
 
-    print(flat_hist_int)
-    print(flat_hist_area)
+    return flat_hist_int
