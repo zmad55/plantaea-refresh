@@ -1,15 +1,14 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from "react-native";
-import createPlantTag from "./createPlantTag";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 
-export default function ListItem({ image, scientificName, localName, category, onPress }) {
+export default function PlantListItem({ image, scientificName, localName, category, onPress }) {
     return (
         <View>
             <View className="flex-row items-center flex-1">
                 <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 bg-white rounded-2xl shadow-md p-3 m-1">
                     <Image source={image} className="w-14 h-14 rounded-full mr-4" />
                     <View>
-                        <Text className="font-josesans-italic text-black">{localName}</Text>
+                        <Text className="font-josesans text-black">{localName}</Text>
                         <Text className="font-josesans italic text-emerald-500 text-xs">{scientificName}</Text>
                         <View className="flex-row">
                             {category[0] == 'medicine' && category[1] == 'consumable' && category[2] == 'ornamental' ?
@@ -31,6 +30,36 @@ export default function ListItem({ image, scientificName, localName, category, o
                     </View>
                 </TouchableOpacity>
             </View>
+        </View>
+    )
+}
+
+export function createPlantTag(isMedicine, isConsumable, isAromatic) {
+    return (
+        <View style={{ flexDirection: 'row' }}>
+            {isMedicine == true ?
+                <View className="bg-red-400 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text style={{ fontSize: 8, color: 'white' }}>Medicine</Text>
+                </View>
+                :
+                null
+            }
+            {isConsumable == true ?
+                // <View style={{ backgroundColor: '#F6C36C', alignItems: 'center', borderRadius: 8, paddingHorizontal: 5, paddingVertical: 1, marginTop: 2, marginRight: 2.5 }}>
+                <View className="bg-yellow-500 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text style={{ fontSize: 8, color: 'white' }}>Consumable</Text>
+                </View>
+                :
+                null
+            }
+            {isAromatic == true ?
+                // <View style={{ backgroundColor: '#E281DA', alignItems: 'center', borderRadius: 8, paddingHorizontal: 5, paddingVertical: 1, marginTop: 2, marginRight: 2.5 }}>
+                <View className="bg-pink-400 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text style={{ fontSize: 8, color: 'white' }}>Ornamental</Text>
+                </View>
+                :
+                null
+            }
         </View>
     )
 }
