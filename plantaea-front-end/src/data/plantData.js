@@ -28,8 +28,8 @@ export const plantListLibrary = [
     },
     {
         id: "3",
-        scientificname: "Ehretia microphylla",
-        localName: "Tsaang Gubat",
+        scientificName: "Ehretia microphylla",
+        localName: 'Tsaang Gubat',
         category: ['medicine', 'consumable'],
         description: "Usually found on Terrestrial Areas, specifically on trees. Used as cure for diarrhea when drank as tea",
         use: "The leaves are used to treat cough, colic, diarrhea, and dysentery",

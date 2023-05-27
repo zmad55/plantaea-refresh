@@ -7,10 +7,10 @@ export default function ListItem({ image, scientificName, localName, category, o
         <View>
             <View className="flex-row items-center flex-1">
                 <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 bg-white rounded-2xl shadow-md p-3 m-1">
-                    <Image source={image} style={{ width: 55, height: 55, borderRadius: 55 / 2, marginRight: 8 }} />
+                    <Image source={image} className="w-14 h-14 rounded-full mr-4" />
                     <View>
-                        <Text className="font-josesans-italic text-red-500">{localName}</Text>
-                        <Text className="font-josesans italic text-emerald-200 text-xs">{scientificName}</Text>
+                        <Text className="font-josesans-italic text-black">{localName}</Text>
+                        <Text className="font-josesans italic text-emerald-500 text-xs">{scientificName}</Text>
                         <View className="flex-row">
                             {category[0] == 'medicine' && category[1] == 'consumable' && category[2] == 'ornamental' ?
                                 createPlantTag(true, true, true)
