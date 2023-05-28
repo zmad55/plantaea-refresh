@@ -1,5 +1,5 @@
-import { sendToken } from "./../utils/sendToken.js";
-import { User } from "./../models/user.js";
+import { sendToken } from "../utils/sendToken.js";
+import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 

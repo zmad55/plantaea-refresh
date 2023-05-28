@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
-//import * as Progress from 'react-native-progress';
 
 const Progress = ({ step, steps, height }) => {
     const animatedValue = React.useRef(new Animated.Value(-1000)).current;

@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Text, Image, SafeAreaView, ScrollView, StyleSheet, ImageBackground, Button } from "react-native";
+import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
+
 import { activities } from '../data/dailyActivities'
-import ListActivities from "../components/ListActivities";
+
+import ListActivities from "../components/c_DailiesScreen/ListActivities";
 
 export default function DailiesScreen({ navigation }) {
   return (
     <SafeAreaView>
       <ScrollView className="mt-10">
         <View className="flex-1 items-center">
-          {/* <View style={{flex:1, alignItems:'center'}}> */}
           <Image
             source={require('../assets/images/gamepad.png')}
             resizeMode="contain"

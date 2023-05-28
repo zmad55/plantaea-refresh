@@ -1,12 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Text, Image, SafeAreaView, ScrollView, ImageBackground, StyleSheet, StatusBar } from "react-native";
-
-// import { windowWidth, windowHeight } from '../utils/Dimensions'
-// import Feather from 'react-native-vector-icons/Feather'
-// import { TouchableOpacity } from "react-native-gesture-handler";
-// import CustomSwitch from "../components/CustomSwitch";
-
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, Image, SafeAreaView, StatusBar } from "react-native";
 
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import * as Animatable from 'react-native-animatable';

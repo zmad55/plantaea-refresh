@@ -1,9 +1,9 @@
 import express from "express";
 
-import { register } from "./../controllers/User.js"
-import { login } from "./../controllers/User.js"
-import { logout } from "./../controllers/User.js"
-import { isAuthenticated } from "./../controllers/User.js"
+import { register } from "../controllers/User.js"
+import { login } from "../controllers/User.js"
+import { logout } from "../controllers/User.js"
+import { isAuthenticated } from "../controllers/User.js"
 
 const router = express.Router();
 

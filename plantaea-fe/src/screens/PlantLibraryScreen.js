@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TextInput, StyleSheet, Image, ImageBackground } from 'react-native'
 
 import Feather from 'react-native-vector-icons/Feather'
-import PlantListItem from '../components/PlantListItem'
-import CustomLibraryTabs from "../components/CustomLibraryTabs";
+
+import PlantListItem from '../components/c_PlantLibraryScreen/PlantListItem'
+import PlantLibraryTabs from "../components/c_PlantLibraryScreen/PlantLibraryTabs";
+
 import { plantListLibrary } from '../data/plantData'
 
-const PlantLibrary = ({ navigation, route }) => {
+const PlantLibraryScreen = ({ navigation, route }) => {
 
   const [descriptionTab, setDescriptionTab] = useState(1);
+
   const onSelectSwitch = (value) => {
     setDescriptionTab(value);
   }
@@ -48,7 +51,7 @@ const PlantLibrary = ({ navigation, route }) => {
             className="w-4/5 h-44 my-2 self-center"
           />
           <View className="px-8 flex-row justify-between items-center rounded-md">
-            <CustomLibraryTabs
+            <PlantLibraryTabs
               selectionMode={1}
               option1="All"
               option2="Medicine"
@@ -93,4 +96,5 @@ const PlantLibrary = ({ navigation, route }) => {
   )
 }
 
-export default PlantLibrary
+
+export default PlantLibraryScreen
