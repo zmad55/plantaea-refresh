@@ -5,13 +5,15 @@ import InputField from '../components/InputField'
 import CustomButton from '../components/CustomButton'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from '../../redux/actions';
+
 import { storeData, getData } from "./../../redux/asyncStorage"
 
 export default function LoginScreen() {
     const { error, userInfo } = useSelector((state) => state.auth)
-
+    
     const dispatch = useDispatch();
 
     const [username, setUsername] = React.useState("");
@@ -56,7 +58,7 @@ export default function LoginScreen() {
                         size={20}
                         color="#989898"
                         className="mr-3" />} inputType="password" onChangeText={setPassword} />
-                <TouchableOpacity className="bg-teal-900 p-5 rounded-lg mt-5 mb-5">
+                <TouchableOpacity className="bg-teal-800 p-5 rounded-lg mt-5 mb-5">
                     <Text className="text-center font-bold text-white text-lg" onPress={loginHandler} disabled={!username || !password}>Login</Text>
                 </TouchableOpacity>
                 {/* <Button disabled={!username || !password} className="bg-teal-900 p-5 rounded-lg mt-5 mb-5" onPress={loginHandler}>
