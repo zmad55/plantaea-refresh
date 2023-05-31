@@ -3,8 +3,8 @@ import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TextInput, S
 
 import Feather from 'react-native-vector-icons/Feather'
 
-import PlantListItem from '../components/c_PlantLibraryScreen/PlantListItem'
-import PlantLibraryTabs from "../components/c_PlantLibraryScreen/PlantLibraryTabs";
+import ListPlant from '../components/plant-library-screen/PlantListItem'
+import InitiateCategoryTabs from "../components/plant-library-screen/PlantLibraryScreen-CategoryTabs";
 
 import { plantListLibrary } from '../data/plantData'
 
@@ -17,7 +17,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   }
 
   const renderPlantListItem = (item) => (
-    <PlantListItem
+    <ListPlant
       key={item.id}
       image={item.image}
       scientificName={item.scientificName}
@@ -51,7 +51,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
             className="w-4/5 h-44 my-2 self-center"
           />
           <View className="px-8 flex-row justify-between items-center rounded-md">
-            <PlantLibraryTabs
+            <InitiateCategoryTabs
               selectionMode={1}
               option1="All"
               option2="Medicine"

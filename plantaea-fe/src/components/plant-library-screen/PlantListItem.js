@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 
-export default function PlantListItem({ image, scientificName, localName, category, onPress }) {
+export default function ListPlant({ image, scientificName, localName, category, onPress }) {
     return (
         <View>
             <View className="flex-row items-center flex-1">

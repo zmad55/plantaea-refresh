@@ -57,7 +57,7 @@ const Progress = ({ step, steps, height }) => {
 }
 
 
-export default function ListActivities({ title, total }) {
+export default function ListActivity({ title, total }) {
     return (
         <View style={{
             flexDirection: 'row',
