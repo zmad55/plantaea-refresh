@@ -45,11 +45,11 @@ const PlantLibraryScreen = ({ navigation, route }) => {
           <Text className="font-light font-josesans tracking-widest text-2xl text-emerald-800 mb-4">
             PLANT LIBRARY
           </Text>
-          <Image
+          {/* <Image
             source={require('../../assets/images/undraw-arts/undraw_bookshelf_clear.png')}
             resizeMode="contain"
             className="w-4/5 h-44 my-2 self-center"
-          />
+          /> */}
           <View className="px-8 flex-row justify-between items-center rounded-md">
             <InitiateCategoryTabs
               selectionMode={1}
@@ -61,13 +61,13 @@ const PlantLibraryScreen = ({ navigation, route }) => {
             />
           </View>
           <View className="border-b-2 border-gray-300 w-10/12" />
-          <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-1 mb-1 mx-5">
+          <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-0 mb-3 mx-5">
             <Feather name="search" size={20} color="#1C4C4E" />
             <TextInput placeholder='Search' className="flex-1 pt-2 pr-12 pb-2 pl-2 text-gray-500" />
           </View>
         </View>
       </View>
-      <ScrollView className="px-4 py-5 mt-0 bg-grayish-green">
+      <ScrollView className="px-4 py-5 mt-0 bg-grayish-green rounded-t-2xl">
         {descriptionTab === 1 && <View>{plantListLibrary.map(renderPlantListItem)}</View>}
         {descriptionTab === 2 && (
           <View>
