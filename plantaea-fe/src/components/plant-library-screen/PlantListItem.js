@@ -11,7 +11,7 @@ export default function ListPlant({ image, scientificName, localName, category, 
                         <Text className="font-josesans text-black">{localName}</Text>
                         <Text className="font-josesans italic text-emerald-500 text-xs">{scientificName}</Text>
                         <View className="flex-row">
-                            {category[0] == 'medicine' && category[1] == 'consumable' && category[2] == 'ornamental' ?
+                            {/* {category[0] == 'medicine' && category[1] == 'consumable' && category[2] == 'ornamental' ?
                                 createPlantTag(true, true, true)
                                 : category[0] == 'medicine' && category[1] == 'consumable' ?
                                     createPlantTag(true, true)
@@ -25,7 +25,25 @@ export default function ListPlant({ image, scientificName, localName, category, 
                                                     createPlantTag(false, true)
                                                     :
                                                     createPlantTag(false, false, true)
-                            }
+                            } */}
+                            {(() => {
+                                switch (true) {
+                                    case category[0] === 'medicine' && category[1] === 'consumable' && category[2] === 'ornamental':
+                                        return createPlantTag(true, true, true);
+                                    case category[0] === 'medicine' && category[1] === 'consumable':
+                                        return createPlantTag(true, true);
+                                    case category[0] === 'medicine' && category[1] === 'ornamental':
+                                        return createPlantTag(true, false, true);
+                                    case category[0] === 'consumable' && category[1] === 'ornamental':
+                                        return createPlantTag(false, true, true);
+                                    case category[0] === 'medicine':
+                                        return createPlantTag(true);
+                                    case category[0] === 'consumable':
+                                        return createPlantTag(false, true);
+                                    default:
+                                        return createPlantTag(false, false, true);
+                                }
+                            })()}
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -37,9 +55,8 @@ export default function ListPlant({ image, scientificName, localName, category, 
 export function createPlantTag(isMedicine, isConsumable, isAromatic) {
     return (
         <View className="flex-row">
-            {isMedicine == true ?
+            {/* {isMedicine == true ?
                 <View className="bg-red-400 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
-                    {/* <Text style={{ fontSize: 8, color: 'white' }}>Medicine</Text> */}
                     <Text className="text-xs color-white">Medicine</Text>
                 </View>
                 :
@@ -58,7 +75,22 @@ export function createPlantTag(isMedicine, isConsumable, isAromatic) {
                 </View>
                 :
                 null
-            }
+            } */}
+            {isMedicine && (
+                <View className="bg-red-400 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text className="text-xs color-white">Medicine</Text>
+                </View>
+            )}
+            {isConsumable && (
+                <View className="bg-yellow-500 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text className="text-xs color-white">Consumable</Text>
+                </View>
+            )}
+            {isAromatic && (
+                <View className="bg-pink-400 items-center rounded-md px-1 py-0.5 mt-1 mr-1">
+                    <Text className="text-xs color-white">Ornamental</Text>
+                </View>
+            )}
         </View>
     )
 }
