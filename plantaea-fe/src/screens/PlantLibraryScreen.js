@@ -61,7 +61,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
             />
           </View>
           <View className="border-b-2 border-gray-300 w-10/12" />
-          <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-0 mb-3 mx-5">
+          <View className="flex-row items-center border border-gray-300 rounded-2xl px-4 py-1 mt-0 mb-4 mx-5">
             <Feather name="search" size={20} color="#1C4C4E" />
             <TextInput placeholder='Search' className="flex-1 pt-2 pr-12 pb-2 pl-2 text-gray-500" />
           </View>
