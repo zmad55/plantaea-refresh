@@ -42,22 +42,28 @@ const MapScreen = ({ navigation, route }) => {
 
   return (
     <View className="flex-1 justify-center items-center">
-      <View className="border-2 border-black relative w-full h-full">
+      <View className="border-4 border-black relative w-full h-full">
         <Animated.View
-          className="absolute left-1/4 top-1/5"
+          className="absolute w-34 h-34 items-center top-1/2"
           style={[
             { transform: [{ translateY: animation }] },
           ]}
         >
-          <Image source={require('./Layer1.png')} />
+          <Image
+            className="object-contain w-12 h-12"
+            source={require('./Layer1.png')}
+          />
         </Animated.View>
         <Animated.View
-          className="absolute left-5 top-5"
+          className="absolute"
           style={[
             { transform: [{ translateY: animation }] },
           ]}
         >
-          <Image source={require('./Layer2.png')} />
+          <Image
+            className="w-full h-full"
+            source={require('./Layer2.png')}
+          />
         </Animated.View>
       </View>
     </View>
