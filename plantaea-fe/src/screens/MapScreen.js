@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
-import { StyleSheet, Text, View, Image, TouchableOpacity, PanResponder, Animated, Dimensions } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { StyleSheet, Text, View, Image, TouchableOpacity, PanResponder, Animated, Dimensions, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Svg, { Polygon } from 'react-native-svg';
 import { RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
@@ -40,32 +41,24 @@ const MapScreen = ({ navigation, route }) => {
     ).start();
   }, [animation]);
 
+  const handlePolygonPress = (shape) => {
+    Alert.alert(`${shape} Clicked`);
+  };
+
   return (
-    <View className="flex-1 justify-center items-center">
-      <View className="border-4 border-black relative w-full h-full">
-        <Animated.View
-          className="absolute w-34 h-34 items-center top-1/2"
-          style={[
-            { transform: [{ translateY: animation }] },
-          ]}
-        >
-          <Image
-            className="object-contain w-12 h-12"
-            source={require('./Layer1.png')}
-          />
-        </Animated.View>
-        <Animated.View
-          className="absolute"
-          style={[
-            { transform: [{ translateY: animation }] },
-          ]}
-        >
-          <Image
-            className="w-full h-full"
-            source={require('./Layer2.png')}
-          />
-        </Animated.View>
-      </View>
+    <View className="flex-1 border-emerald-100 border-2 items-center">
+      <Svg width="300" height="300" className="flex-1 border-emerald-500 border-2" >
+        <Polygon
+          points="150,30 200,150 280,150 215,220 250,340 150,270 50,340 85,220 20,150 100,150"
+          fill="#FF0000"
+          onPress={() => handlePolygonPress('Star')}
+        />
+        <Polygon
+          points="150,80 230,220 70,220"
+          fill="#00FF00"
+          onPress={() => handlePolygonPress('Triangle')}
+        />
+      </Svg>
     </View>
   );
 };
