@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Animated, Dimensions, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Svg, { Polygon, Image } from 'react-native-svg';
+import Svg, { Polygon, Image, Path } from 'react-native-svg';
 import { RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
@@ -56,18 +56,27 @@ const MapScreen = ({ navigation, route }) => {
       <View className="absolute left-20 top-40">
         <TouchableOpacity
           onPress={() => handlePolygonPress('Star')}
-          hitSlop={{ top: -10, bottom: -10, left: -10, right: -10 }}
         >
-          <Animated.Image
+          {/* <Animated.Image
             source={require('./Layer1.png')}
             resizeMode="contain" // Adjust the resizeMode value as needed
             className="h-24 w-24"
             style={{
               transform: [{ translateY: animation }],
             }}
-          />
+          /> */}
+          
         </TouchableOpacity>
+        
       </View>
+      <Svg width="100%" height="100%" >
+          <Path
+            d="M10 10 L90 10 L50 90 Z"
+            fill="blue"
+            stroke="black"
+            strokeWidth={1}
+          />
+        </Svg>
 
       {/* <Polygon
           points="150,30 200,150 280,150 215,220 250,340 150,270 50,340 85,220 20,150 100,150"
