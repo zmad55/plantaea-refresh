@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@react-native-community/art": "^1.2.0"
+  }
+}

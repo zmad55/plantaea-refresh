@@ -10,14 +10,6 @@ const HomeScreen = ({ navigation }) => {
             <SafeAreaView className="flex-1 bg-grayish-green">
                 <View className="p-2 pb-5 bg-white rounded-b-3xl">
                     <View className="align-center justify-between bg-white pt-2">
-                        {/* <View>
-                <TouchableOpacity onPress={()=>navigation.openDrawer()}>
-                    <ImageBackground source={require('../assets/images/hamburgerMenu-icon.png')} style={{width:30,height:30}} />
-                </TouchableOpacity>   
-                </View> fontSize: 20,
-        color: '#1C4C4E',
-        fontFamily: 'Helvetica',
-        letterSpacing: 10*/}
                         <View>
                             <Text className="text-2xl text-emerald-800 self-center font-light font-josesans tracking-widest" >PLANTAEA</Text>
                         </View>
