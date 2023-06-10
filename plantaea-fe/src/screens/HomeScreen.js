@@ -1,8 +1,9 @@
-import {  Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import React, { useState, useEffect } from 'react';
 
+import DirectoryCard from '../components/home-screen/HomeScreen-Directories'
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -18,7 +19,6 @@ const HomeScreen = ({ navigation }) => {
                         source={require('../../assets/images/undraw-arts/undraw_gardening_clear.png')}
                         resizeMode="contain"
                         className="w-full h-48 my-2 self-center"
-                    // style={{ width: windowWidth, height: 200, marginTop: 2, marginBottom: 10 }}
                     >
                     </Image>
                     <TouchableOpacity
@@ -32,53 +32,32 @@ const HomeScreen = ({ navigation }) => {
                 <ScrollView className="align-center flex-1 py-4">
                     <View className="flex-1 my-1 mx-2">
                         <View className="flex-row justify-evenly">
-                            <TouchableOpacity onPress={() => navigation.navigate('CameraStack')}>
-                                <View className="w-36 h-44 p-1 rounded-xl bg-white opacity-90">
-                                    <Image
-                                        source={require('../../assets/images/undraw-arts/undraw_camera_clear.png')}
-                                        resizeMode="contain"
-                                        className="w-full h-24 self-center m-1"
-                                    />
-                                    <Text className="text-center text-2xl text-emerald-800 font-light font-josesans">SCAN</Text>
-                                    <Text className="text-center text-gray-500 text-sm font-josesans">Scan a plant</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("MapStack")}>
-                                <View className="w-36 h-44 p-1 rounded-xl bg-white opacity-90">
-                                    <Image
-                                        source={require('../../assets/images/undraw-arts/undraw_currentlocation_clear.png')}
-                                        resizeMode="contain"
-                                        className="w-full h-24 self-center m-1"
-                                    />
-                                    <Text className="text-center text-2xl text-emerald-800 font-light font-josesans">LOCATE</Text>
-                                    <Text className="text-center text-gray-500 text-sm font-josesans">Find it fast</Text>
-                                </View>
-                            </TouchableOpacity>
+                            <DirectoryCard
+                                imageSource={require('../../assets/images/undraw-arts/undraw_camera_clear.png')}
+                                title="SCAN"
+                                description="Scan a plant"
+                                onPressAction={() => navigation.navigate('CameraStack')}
+                            />
+                            <DirectoryCard
+                                imageSource={require('../../assets/images/undraw-arts/undraw_currentlocation_clear.png')}
+                                title="LOCATE"
+                                description="Find it fast"
+                                onPressAction={() => navigation.navigate('MapStack')}
+                            />
                         </View>
                         <View className="flex-row justify-evenly pt-5">
-                            <TouchableOpacity onPress={() => navigation.navigate('LibraryStack')}>
-                                <View className="w-36 h-44 p-1 rounded-xl bg-white opacity-90">
-                                    <Image
-                                        source={require('../../assets/images/undraw-arts/undraw_bookshelf_clear.png')}
-                                        resizeMode="contain"
-                                        className="w-48 h-24 self-center m-1"
-                                    />
-                                    <Text className="text-center text-2xl text-emerald-800 font-light font-josesans">LIBRARY</Text>
-                                    <Text className="text-center text-gray-500 text-sm font-josesans">Browse plants</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('--')}>
-                                <View className="w-36 h-44 p-1 rounded-xl bg-white opacity-90">
-                                    <Image
-                                        source={require('../../assets/images/undraw-arts/undraw_question_clear.png')}
-                                        resizeMode="contain"
-                                        className="w-48 h-24 self-center m-1"
-                                    />
-
-                                    <Text className="text-center text-2xl text-emerald-800 font-light font-josesans">GUIDE</Text>
-                                    <Text className="text-center text-gray-500 text-sm font-josesans">Need help?</Text>
-                                </View>
-                            </TouchableOpacity>
+                            <DirectoryCard
+                                imageSource={require('../../assets/images/undraw-arts/undraw_bookshelf_clear.png')}
+                                title="LIBRARY"
+                                description="Browse plants"
+                                onPressAction={() => navigation.navigate('LibraryStack')}
+                            />
+                            <DirectoryCard
+                                imageSource={require('../../assets/images/undraw-arts/undraw_question_clear.png')}
+                                title="GUIDE"
+                                description="Need help?"
+                                onPressAction={() => navigation.navigate('--')}
+                            />
                         </View>
                     </View>
                 </ScrollView>
