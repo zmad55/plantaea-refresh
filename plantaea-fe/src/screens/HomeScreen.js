@@ -10,27 +10,27 @@ const HomeScreen = ({ navigation }) => {
         <View className="flex-1 pt-6 bg-white">
             <SafeAreaView className="flex-1 bg-grayish-green">
                 <View className="p-2 pb-5 bg-white rounded-b-3xl">
-                    <View className="align-center justify-between bg-white pt-2">
+                    <View className="justify-between pt-2 bg-white align-center">
                         <View>
-                            <Text className="text-2xl text-emerald-800 self-center font-light font-josesans tracking-widest" >PLANTAEA</Text>
+                            <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans" >PLANTAEA</Text>
                         </View>
                     </View>
                     <Image
                         source={require('../../assets/images/undraw-arts/undraw_gardening_clear.png')}
                         resizeMode="contain"
-                        className="w-full h-48 my-2 self-center"
+                        className="self-center w-full h-48 my-2"
                     >
                     </Image>
                     <TouchableOpacity
-                        className="flex-row items-center justify-between bg-white border border-gray-300 rounded-2xl px-4 py-1 mx-9 shadow-md"
+                        className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 shadow-md rounded-2xl mx-9"
                         onPress={() => navigation.navigate('PlantLibraryStack')}
                     >
-                        <Text className="flex-1 pt-2 pr-12 pb-2 text-gray-700 font-josesans">Search plant</Text>
+                        <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">Search plant</Text>
                         <Feather name="search" size={20} color="#1C4C4E" className="mr-5" />
                     </TouchableOpacity>
                 </View>
-                <ScrollView className="align-center flex-1 py-4">
-                    <View className="flex-1 my-1 mx-2">
+                <ScrollView className="flex-1 py-4 align-center">
+                    <View className="flex-1 mx-2 my-1">
                         <View className="flex-row justify-evenly">
                             <DirectoryCard
                                 imageSource={require('../../assets/images/undraw-arts/undraw_camera_clear.png')}
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
                                 onPressAction={() => navigation.navigate('MapStack')}
                             />
                         </View>
-                        <View className="flex-row justify-evenly pt-5">
+                        <View className="flex-row pt-5 justify-evenly">
                             <DirectoryCard
                                 imageSource={require('../../assets/images/undraw-arts/undraw_bookshelf_clear.png')}
                                 title="LIBRARY"

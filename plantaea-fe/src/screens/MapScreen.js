@@ -46,35 +46,12 @@ const MapScreen = ({ navigation, route }) => {
   };
 
   return (
-    <View className="flex-1 border-emerald-100 border-2 items-center">
-
-
-
-
-      {/* <View style={{ position: 'absolute', left: 100, top: 200, height: 50, width: 50}}> */}
-
-      <View className="absolute left-20 top-40">
-        <TouchableOpacity
-          onPress={() => handlePolygonPress('Star')}
-        >
-          {/* <Animated.Image
-            source={require('./Layer1.png')}
-            resizeMode="contain" // Adjust the resizeMode value as needed
-            className="h-24 w-24"
-            style={{
-              transform: [{ translateY: animation }],
-            }}
-          /> */}
-          
-        </TouchableOpacity>
-        
-      </View>
-      <Svg width="100%" height="100%" >
+    <Animated.View className="items-center justify-center flex-1 w-full h-screen border-2 border-emerald-100">
+        <Svg className="absolute w-full h-full">
           <Path
-            d="M10 10 L90 10 L50 90 Z"
+            d="M50 0 L100 100 L0 100 Z"
             fill="blue"
-            stroke="black"
-            strokeWidth={1}
+            onPress={() => handlePolygonPress('Star')}
           />
         </Svg>
 
@@ -85,7 +62,7 @@ const MapScreen = ({ navigation, route }) => {
         /> */}
 
 
-    </View>
+    </Animated.View>
   );
 };
 

@@ -5,15 +5,13 @@ import InputField from '../components/InputField'
 import CustomButton from '../components/CustomButton'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from '../../redux/actions';
-
 import { storeData, getData } from "./../../redux/asyncStorage"
 
 export default function LoginScreen() {
     const { error, userInfo } = useSelector((state) => state.auth)
-    
+
     const dispatch = useDispatch();
 
     const [username, setUsername] = React.useState("");
@@ -33,7 +31,7 @@ export default function LoginScreen() {
     }, [error, dispatch, alert])
 
     return (
-        <SafeAreaView className="flex-1 justify-center">
+        <SafeAreaView className="justify-center flex-1">
             <View className="px-8">
                 <View style={{ alignItems: 'center' }}>
                     <Image
@@ -41,14 +39,14 @@ export default function LoginScreen() {
                         resizeMode="contain"
                         style={{ width: 80, height: 80 }}
                     />
-                    <Text className="text-3xl font-bold text-green-800 mb-10">Login</Text>
+                    <Text className="mb-10 text-3xl font-bold text-green-800">Login</Text>
                 </View>
                 <InputField
                     value={username}
-                    label={'Email ID'}
-                    icon={<MaterialIcons
-                        name='alternate-email'
-                        size={20} color="#989898"
+                    label={'Username'}
+                    icon={<Ionicons
+                        name='person-outline'
+                        size={20}
                         className="mr-3" />} keyboardType="email-address" onChangeText={setUsername} />
                 <InputField
                     value={password}
@@ -56,18 +54,18 @@ export default function LoginScreen() {
                     icon={<Ionicons
                         name='ios-lock-closed-outline'
                         size={20}
-                        color="#989898"
                         className="mr-3" />} inputType="password" onChangeText={setPassword} />
-                <TouchableOpacity className="bg-teal-800 p-5 rounded-lg mt-5 mb-5">
-                    <Text className="text-center font-bold text-white text-lg" onPress={loginHandler} disabled={!username || !password}>Login</Text>
+                {/* <div className="container p-4 mx-auto">
+                    <InputField placeholder="Email" />
+                    <InputField placeholder="Password" />
+                </div> */}
+                <TouchableOpacity className="p-5 mt-5 mb-5 bg-teal-800 rounded-lg">
+                    <Text className="text-lg font-bold text-center text-white" onPress={loginHandler} disabled={!username || !password}>Login</Text>
                 </TouchableOpacity>
-                {/* <Button disabled={!username || !password} className="bg-teal-900 p-5 rounded-lg mt-5 mb-5" onPress={loginHandler}>
-                    <Text className="text-center font-bold text-white text-lg">Login</Text>
-                </Button> */}
                 <View className="flex-row justify-center mb-2">
                     <Text>First time using the Plantaea?</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                        <Text className="text-green-900 font-bold"> Register</Text>
+                        <Text className="font-bold text-green-900"> Register</Text>
                     </TouchableOpacity>
                 </View>
             </View>
