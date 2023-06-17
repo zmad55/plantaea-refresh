@@ -3,18 +3,24 @@
 ## A full stack Plant-Recognition, GiS-Integrated, and Gamified Application
 
 ## Details
-A collaborative effort of the Plantaea Group for Thesis 2. 
+
+A collaborative effort of the Plantaea Group for Thesis 2.
 
 ## Members
 
 ## Built With:
-* ![Javascript][Javascript]
-* ![React-Native][React-Native]
-* ![Node][Node.js]
-* ![Redux][Redux]
-* ![Python][Python]
-* ![Flask][Flask]
 
+- ![Javascript][Javascript]
+- ![React-Native][React-Native]
+- ![Node][Node.js]
+- ![Redux][Redux]
+- ![Python][Python]
+- ![Flask][Flask]
+
+## Aditional Tools Used:
+
+- https://react-svgr.com/playground/?dimensions=false&expandProps=start&native=true
+- https://picsvg.com/
 
 [Flask]: https://img.shields.io/badge/flask-gray?style=for-the-badge&logo=flask&logoColor=white
 [Javascript]: https://img.shields.io/badge/javascript-gray?style=for-the-badge&logo=javascript&logoColor=yellow
