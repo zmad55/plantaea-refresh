@@ -33,10 +33,10 @@ const MapScreen = ({ navigation, route, props }) => {
   }, [animation]);
 
   return (
-    <View className="flex-1 bg-grayish-green">
+    <View className="flex-1 bg-gray-200">
       <View className="flex-1">
         <ImageBackground
-          source={require('../assets/map-backgrounds/main-bg-2.png')}
+          source={require('../assets/map-backgrounds/main-bg-22.png')}
           className="flex-1 bg-repeat bg-cover"
         >
           <Animated.View
@@ -44,7 +44,7 @@ const MapScreen = ({ navigation, route, props }) => {
             className="items-center justify-center flex-1"
             style={{ transform: [{ translateY: animation }] }}
           >
-            <SvgComponent width="90%" height="90%" strokeWidth={2} stroke="darkgray" />
+            <SvgComponent width="90%" height="90%" strokeWidth={3} stroke="gray" />
           </Animated.View>
         </ImageBackground>
       </View>

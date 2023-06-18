@@ -3,25 +3,38 @@ import Feather from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import React, { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import FlipCard from 'react-native-flip-card'
 
+import FeaturedPlantCardFront from '../components/home-screen/FeaturedPlantCardFront';
+import FeaturedPlantCardBack from '../components/home-screen/FeaturedPlantCardBack';
 import DirectoryCard from '../components/home-screen/HomeScreen-Directories'
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <View className="flex-1 pt-6 bg-white">
-            <SafeAreaView className="flex-1 bg-gray-200">
-                <View className="p-2 pb-5 bg-white rounded-b-3xl">
+        <SafeAreaView className="flex-1 bg-white">
+            <View className="flex-1 mt-6 bg-gray-200">
+                <View className="p-2 bg-white rounded-b-3xl">
                     <View className="justify-between pt-2 bg-white align-center">
-                        <View>
-                            <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
-                        </View>
+                        <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
+                        <ScrollView>
+                            <FlipCard flipHorizontal={true} flipVertical={false} className="h-full">
+                                <FeaturedPlantCardFront text="Tap me"></FeaturedPlantCardFront>
+                                <FeaturedPlantCardBack text="hai"></FeaturedPlantCardBack>
+                            </FlipCard>
+                        </ScrollView>
+
                     </View>
-                    <Image
+
+
+
+
+                    {/* <Image
                         source={require('../../assets/images/undraw-arts/undraw_gardening_clear.png')}
                         resizeMode="contain"
                         className="self-center w-full h-48 my-2"
                     >
-                    </Image>
+                    </Image> */}
+
                 </View>
                 <ScrollView className="flex-1 align-center">
                     <View className="my-5 mx-11">
@@ -36,19 +49,16 @@ const HomeScreen = ({ navigation }) => {
                                 className="mr-0 text-emerald-500" />
                         </TouchableOpacity>
                     </View>
-
-                    <View className="flex-1 mx-2">
+                    <View className="flex-1 mx-2 mb-5">
                         <View className="flex-row justify-evenly">
                             <DirectoryCard
                                 iconName={"scan-circle-sharp"}
-                                // imageSource={require('../../assets/images/undraw-arts/undraw_camera_clear.png')}
                                 title="SCAN"
                                 description="Identify Leaves"
                                 onPressAction={() => navigation.navigate('CameraStack')}
                             />
                             <DirectoryCard
                                 iconName={"map-sharp"}
-                                // imageSource={require('../../assets/images/undraw-arts/undraw_currentlocation_clear.png')}
                                 title="MAP"
                                 description="Provincial Data"
                                 onPressAction={() => navigation.navigate('MapStack')}
@@ -57,14 +67,12 @@ const HomeScreen = ({ navigation }) => {
                         <View className="flex-row pt-5 justify-evenly">
                             <DirectoryCard
                                 iconName={"library-sharp"}
-                                // imageSource={require('../../assets/images/undraw-arts/undraw_bookshelf_clear.png')}
                                 title="LIBRARY"
                                 description="Browse Plants"
                                 onPressAction={() => navigation.navigate('LibraryStack')}
                             />
                             <DirectoryCard
                                 iconName={"journal-sharp"}
-                                // imageSource={require('../../assets/images/undraw-arts/undraw_question_clear.png')}
                                 title="Guide"
                                 description="Getting Started"
                                 onPressAction={() => navigation.navigate('--')}
@@ -72,8 +80,8 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
-        </View>
+            </View >
+        </SafeAreaView>
     );
 }
 
