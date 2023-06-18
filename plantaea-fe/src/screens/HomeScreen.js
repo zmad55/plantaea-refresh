@@ -17,24 +17,13 @@ const HomeScreen = ({ navigation }) => {
                     <View className="justify-between pt-2 bg-white align-center">
                         <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
                         <ScrollView>
-                            <FlipCard flipHorizontal={true} flipVertical={false} className="h-full">
+                            <FlipCard flipHorizontal={false} flipVertical={true} className="h-full">
                                 <FeaturedPlantCardFront text="Tap me"></FeaturedPlantCardFront>
                                 <FeaturedPlantCardBack text="hai"></FeaturedPlantCardBack>
                             </FlipCard>
                         </ScrollView>
 
                     </View>
-
-
-
-
-                    {/* <Image
-                        source={require('../../assets/images/undraw-arts/undraw_gardening_clear.png')}
-                        resizeMode="contain"
-                        className="self-center w-full h-48 my-2"
-                    >
-                    </Image> */}
-
                 </View>
                 <ScrollView className="flex-1 align-center">
                     <View className="my-5 mx-11">
