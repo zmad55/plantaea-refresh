@@ -24,16 +24,19 @@ const HomeScreen = ({ navigation }) => {
                     </Image>
                 </View>
                 <ScrollView className="flex-1 align-center">
-                    <TouchableOpacity
-                        className="flex-row items-center justify-between px-4 py-1 my-5 bg-white border border-gray-300 rounded-full shadow-md mx-11"
-                        onPress={() => navigation.navigate('PlantLibraryStack')}
-                    >
-                        <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">Search plant</Text>
-                        <Ionicons
-                            name="search-sharp"
-                            size={22}
-                            className="mr-0 text-emerald-500" />
-                    </TouchableOpacity>
+                    <View className="my-5 mx-11">
+                        <TouchableOpacity
+                            className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-full shadow-md"
+                            onPress={() => navigation.navigate('PlantLibraryStack')}
+                        >
+                            <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">Search plant</Text>
+                            <Ionicons
+                                name="search-sharp"
+                                size={22}
+                                className="mr-0 text-emerald-500" />
+                        </TouchableOpacity>
+                    </View>
+
                     <View className="flex-1 mx-2">
                         <View className="flex-row justify-evenly">
                             <DirectoryCard
