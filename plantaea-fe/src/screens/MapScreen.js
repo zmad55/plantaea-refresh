@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Animated, Alert, TouchableOpacity } from 'react-native';
-import Svg, { Path, Defs, Pattern, Image, Filter, FeGaussianBlur, FeSpecularLighting, FeComposite } from 'react-native-svg';
+import { View, Animated, Alert, SafeAreaView, ImageBackground } from 'react-native';
+import Svg, { Path, Defs, Pattern, Image, Filter, FeGaussianBlur, FeSpecularLighting, FeComposite, SvgXml } from 'react-native-svg';
 
 const MapScreen = ({ navigation, route, props }) => {
   const animation = useRef(new Animated.Value(0)).current;
@@ -9,7 +9,7 @@ const MapScreen = ({ navigation, route, props }) => {
     Animated.loop(
       Animated.sequence([
         Animated.timing(animation, {
-          toValue: -2, // Move image up by 2 pixels
+          toValue: -1, // Move image up by 2 pixels
           duration: 1000,
           useNativeDriver: true,
         }),
@@ -19,7 +19,7 @@ const MapScreen = ({ navigation, route, props }) => {
           useNativeDriver: true,
         }),
         Animated.timing(animation, {
-          toValue: 2, // Move image down by 2 pixels
+          toValue: 1, // Move image down by 2 pixels
           duration: 1000,
           useNativeDriver: true,
         }),
@@ -33,21 +33,31 @@ const MapScreen = ({ navigation, route, props }) => {
   }, [animation]);
 
   return (
-    <Animated.View
-      // className={`items-center justify-center flex-1 transform translate-y-${animation}`}
-      className="items-center justify-center flex-1"
-      style={{ transform: [{ translateY: animation }] }}
-    >
-      <SvgComponent width="90%" height="90%" strokeWidth={0} stroke="darkgreen" />
-    </Animated.View>
+    <View className="flex-1 bg-grayish-green">
+      <View className="flex-1">
+        <ImageBackground
+          source={require('../assets/map-backgrounds/main-bg-2.png')}
+          className="flex-1 bg-repeat bg-cover"
+        >
+          <Animated.View
+            // className={`items-center justify-center flex-1 transform translate-y-${animation}`}
+            className="items-center justify-center flex-1"
+            style={{ transform: [{ translateY: animation }] }}
+          >
+            <SvgComponent width="90%" height="90%" strokeWidth={2} stroke="darkgray" />
+          </Animated.View>
+        </ImageBackground>
+      </View>
+
+
+
+    </View>
   );
 };
 
 const handlePolygonPress = (shape) => {
   Alert.alert(`${shape} Clicked`);
 };
-
-// 
 
 const SvgComponent = (props) => (
   <Svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 567">
@@ -60,10 +70,10 @@ const SvgComponent = (props) => (
         <Image
           // https://www.pexels.com/photo/the-lion-s-head-in-baguio-city-12914725/
           href={require('../assets/map-backgrounds/benguet-bg.jpeg')}
-          x="0"
-          y="0"
-          width="200"
-          height="200"
+          x="-20"
+          y="-32"
+          width="300"
+          height="250"
         />
       </Pattern>
       <Pattern id="ifugaoBg" patternUnits="userSpaceOnUse" width="400" height="200">
@@ -71,7 +81,7 @@ const SvgComponent = (props) => (
           // https://www.pexels.com/photo/aerial-photo-of-banaue-rice-terraces-3698534/
           href={require('../assets/map-backgrounds/ifugao-bg.jpeg')}
           x="0"
-          y="0"
+          y="-20"
           width="400"
           height="300"
         />
