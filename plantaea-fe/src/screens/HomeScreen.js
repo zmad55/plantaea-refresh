@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
                     <View className="justify-between pt-2 bg-white align-center">
                         <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
                         <ScrollView>
-                            <FlipCard flipHorizontal={false} flipVertical={true} className="h-full">
+                            <FlipCard flipHorizontal={false} flipVertical={true} className="h-full my-5">
                                 <FeaturedPlantCardFront text="Tap me"></FeaturedPlantCardFront>
                                 <FeaturedPlantCardBack text="hai"></FeaturedPlantCardBack>
                             </FlipCard>
