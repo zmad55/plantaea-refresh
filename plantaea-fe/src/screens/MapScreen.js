@@ -9,22 +9,22 @@ const MapScreen = ({ navigation, route, props }) => {
     Animated.loop(
       Animated.sequence([
         Animated.timing(animation, {
-          toValue: -1, // Move image up by 2 pixels
+          toValue: -1,
           duration: 1000,
           useNativeDriver: true,
         }),
         Animated.timing(animation, {
-          toValue: 0, // Move image back to its original position
+          toValue: 0,
           duration: 1000,
           useNativeDriver: true,
         }),
         Animated.timing(animation, {
-          toValue: 1, // Move image down by 2 pixels
+          toValue: 1,
           duration: 1000,
           useNativeDriver: true,
         }),
         Animated.timing(animation, {
-          toValue: 0, // Move image back to its original position
+          toValue: 0,
           duration: 1000,
           useNativeDriver: true,
         }),

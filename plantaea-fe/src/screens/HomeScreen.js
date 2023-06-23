@@ -18,8 +18,8 @@ const HomeScreen = ({ navigation }) => {
                         <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
                         <ScrollView>
                             <FlipCard flipHorizontal={false} flipVertical={true} className="h-full my-5">
-                                <FeaturedPlantCardFront text="Tap me"></FeaturedPlantCardFront>
-                                <FeaturedPlantCardBack text="hai"></FeaturedPlantCardBack>
+                                <FeaturedPlantCardFront text="Tap me" />
+                                <FeaturedPlantCardBack title="Lagundi" text='Or "Lagundi" is traditionally used to treat cough, fever, and clogged sinuses.' />
                             </FlipCard>
                         </ScrollView>
 

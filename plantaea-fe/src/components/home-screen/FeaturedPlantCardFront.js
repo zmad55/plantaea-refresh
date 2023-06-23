@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export default function FeaturedPlantCardFront({ text }) {
     return (
-        <View className="items-center justify-center py-2 bg-gray-300 mx-14 rounded-2xl h-44">
+        <View className="items-center justify-center py-2 bg-gray-300 mx-9 rounded-2xl h-44">
             <Image source={require('../../assets/images_/trivia-bg.png')} className="h-32 w-72" resizeMode="contain" />
             <View className="flex-row items-center justify-end mb-2">
                 <Text className="text-xl text-emerald-800 font-josesans-reg">{text + " "}</Text>
