@@ -9,11 +9,6 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true, minlength: [6, "Password must be at least 6 characters long"], select: false }
 });
 
-userSchema.methods.generateAuthToken = function() {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY, { expiresIn: process.env.JWT_EXPIRE });
-    return token;
-};
-
 const User = mongoose.model("User", userSchema);
 
 // const validate = (data) => {
@@ -24,4 +19,4 @@ const User = mongoose.model("User", userSchema);
 //     return schema.validate(data);
 // };
 
-export { User }
+export default User;

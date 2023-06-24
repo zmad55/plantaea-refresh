@@ -7,8 +7,8 @@ import HyperLink from '../components/HyperLink';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from '../../redux/actions';
-import { storeData, getData } from "./../../redux/asyncStorage"
+import { userLogin } from './../redux/actions';
+import { storeData, getData } from "./../redux/asyncStorage"
 
 export default function LoginScreen() {
     const { error, userInfo } = useSelector((state) => state.auth)

@@ -12,14 +12,6 @@ import LibraryStack from './PlantLibraryStack';
 const Stack = createStackNavigator();
 
 export default function HomeStack({ navigation, route }) {
-  //   React.useLayoutEffect(() => {
-  //     const routeName = getFocusedRouteNameFromRoute(route);
-  //     if (routeName === "MapStack"){
-  //       navigation.setOptions({tabBarStyle: {display: 'none'}});
-  //     } else {
-  //         navigation.setOptions({tabBarStyle: {display: 'flex'}});
-  //     }
-  // }, [navigation, route]);
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />

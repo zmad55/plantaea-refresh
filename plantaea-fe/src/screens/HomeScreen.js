@@ -5,25 +5,29 @@ import React, { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FlipCard from 'react-native-flip-card'
 
+import { storeData, getData } from "./../redux/asyncStorage"
+import { useDispatch, useSelector } from 'react-redux'
+
 import FeaturedPlantCardFront from '../components/home-screen/FeaturedPlantCardFront';
 import FeaturedPlantCardBack from '../components/home-screen/FeaturedPlantCardBack';
 import DirectoryCard from '../components/home-screen/HomeScreen-Directories'
 
 const HomeScreen = ({ navigation }) => {
+    
+    const { user } = useSelector(state => state.auth)
+    console.log(user)
+
     return (
         <SafeAreaView className="flex-1 bg-white">
             <View className="flex-1 mt-6 bg-gray-200">
                 <View className="p-2 bg-white rounded-b-3xl">
-                    <View className="justify-between pt-2 bg-white align-center">
-                        <Text className="self-center text-2xl font-light tracking-widest text-emerald-800 font-josesans-reg" >Good Day</Text>
-                        <ScrollView>
-                            <FlipCard flipHorizontal={false} flipVertical={true} className="h-full my-5">
-                                <FeaturedPlantCardFront text="Tap me" />
-                                <FeaturedPlantCardBack title="Lagundi" text='Or "Lagundi" is traditionally used to treat cough, fever, and clogged sinuses.' />
-                            </FlipCard>
-                        </ScrollView>
-
-                    </View>
+                    <Text className="text-2xl font-light tracking-widest self-left text-emerald-800 font-josesans-reg">Good Day </Text>
+                    <ScrollView>
+                        <FlipCard flipHorizontal={true} flipVertical={false} className="h-full my-5 mx-9">
+                            <FeaturedPlantCardFront text="Tap me" />
+                            <FeaturedPlantCardBack title="Lagundi" text='Or "Lagundi" is traditionally used to treat cough, fever, and clogged sinuses.' />
+                        </FlipCard>
+                    </ScrollView>
                 </View>
                 <ScrollView className="flex-1 align-center">
                     <View className="my-5 mx-11">
