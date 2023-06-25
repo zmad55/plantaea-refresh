@@ -35,4 +35,4 @@ A collaborative effort of the Plantaea Group for Thesis 2.
 [Node.js]: https://img.shields.io/badge/Node.js-gray?style=for-the-badge&logo=nodedotjs&logoColor=green
 [Redux]: https://img.shields.io/badge/redux-gray?style=for-the-badge&logo=redux&logoColor=red
 [Python]: https://img.shields.io/badge/python-gray?style=for-the-badge&logo=python&logoColor=green
-[Express.js]: https://img.shields.io/badge/express.js-gray?style=for-the-badge&logo=python&logoColor=black
+[Express.js]: https://img.shields.io/badge/express.js-gray?style=for-the-badge&logo=expressdotjs&logoColor=black
