@@ -9,11 +9,18 @@ A collaborative effort of the Plantaea Group for Thesis 2.
 ## Members
 
 ## Built With:
-
+### Front-end
 - ![Javascript][Javascript]
-- ![React-Native][React-Native]
 - ![Node][Node.js]
+- ![React-Native][React-Native]
 - ![Redux][Redux]
+
+### Back-end
+- ![Javascript][Javascript]
+- ![Node.js][Node.js]
+- ![Express.js][Express.js]
+
+### Plant-Recognition Back-End
 - ![Python][Python]
 - ![Flask][Flask]
 
@@ -28,3 +35,4 @@ A collaborative effort of the Plantaea Group for Thesis 2.
 [Node.js]: https://img.shields.io/badge/Node.js-gray?style=for-the-badge&logo=nodedotjs&logoColor=green
 [Redux]: https://img.shields.io/badge/redux-gray?style=for-the-badge&logo=redux&logoColor=red
 [Python]: https://img.shields.io/badge/python-gray?style=for-the-badge&logo=python&logoColor=green
+[Express.js]: https://img.shields.io/badge/express.js-gray?style=for-the-badge&logo=python&logoColor=black
