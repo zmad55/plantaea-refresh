@@ -1,35 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import { Image, SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 import InputField from '../components/InputField'
 import Button from '../components/Button'
 import HyperLink from '../components/HyperLink';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from './../redux/actions';
 import { storeData, getData } from "./../redux/asyncStorage"
+import { useLoginMutation } from '@redux/slices/userApiSlice'
+import { setCredentials } from '@redux/slices/authSlice'
 
 export default function LoginScreen() {
-    const { error, userInfo } = useSelector((state) => state.auth)
-
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const navigation = useNavigation();
+    const [login, { isLoading, error }] = useLoginMutation();
 
-    const loginHandler = () => {
-        dispatch(userLogin({ username: username, password: password }))
+    const { userInfo } = useSelector((state) => state.auth)
+
+    const loginHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await login({ username, password }).unwrap();
+            dispatch(setCredentials({ ...res }))
+        } catch (error) {
+            console.log(error?.data?.message || error.error)
+        }
     };
 
-    useEffect(() => {
-        if (error) {
-            alert(error)
-            dispatch({ type: "clearError" })
-        }
-    }, [error, dispatch, alert])
+
+    // useEffect(() => {
+    //     if (error) {
+    //         alert(error)
+    //         dispatch({ type: "clearError" })
+    //     }
+    // }, [error, dispatch, alert])
 
     return (
         <SafeAreaView className="justify-center flex-1">

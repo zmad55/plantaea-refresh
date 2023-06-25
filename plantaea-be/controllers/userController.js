@@ -3,6 +3,33 @@ import User from "./../models/userModel.js";
 import asyncHandler from 'express-async-handler';
 import bcrypt from "bcrypt"
 
+// @desc    Create new user account
+// @route   GET api/user/register
+// @access  Private
+export const userRegister = asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
+    // Check for missing fields
+    if (!username || !password) {
+        res.status(401).send({ success: false, message: "Username and Password are required" });
+        return;
+    }
+
+    // Check if the user with that username already exists
+    const user = await User.findOne({ username: username });
+    if (user) {
+        res.status(401).send({ success: false, message: "Username already exists" });
+        return;
+    }
+
+    // Encrypt password
+    const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    // Create the user
+    await new User({ username, password: hashPassword }).save();
+    res.status(201).send({ success: true, message: "User created successfully" })
+});
+
 // @desc    User login
 // @route   GET api/user/login
 // @access  Private
@@ -10,7 +37,7 @@ export const userLogin = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
     // Check for missing fields
     if (!username || !password) {
-        return res.status(400).send({ success: false, message: "Username and password are required." });
+        return res.status(400).send({ success: false, message: "Username and Password are required." });
     }
 
     // Find user with the given username
@@ -49,33 +76,6 @@ export const getUserProfile = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('User not found');
     }
-});
-
-// @desc    Create new user account
-// @route   GET api/user/register
-// @access  Private
-export const userRegister = asyncHandler(async (req, res) => {
-    const { username, password } = req.body;
-    // Check for missing fields
-    if (!username || !password) {
-        res.status(401).send({ success: false, message: "Username, email and password are required" });
-        return;
-    }
-
-    // Check if the user with that username already exists
-    const user = await User.findOne({ username: username });
-    if (user) {
-        res.status(401).send({ success: false, message: "Username already exists" });
-        return;
-    }
-
-    // Encrypt password
-    const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
-    const hashPassword = await bcrypt.hash(password, salt);
-
-    // Create the user
-    await new User({ username, password: hashPassword }).save();
-    res.status(201).send({ success: true, message: "User created successfully" })
 });
 
 // @desc    Logs out current user
