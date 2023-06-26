@@ -4,13 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-
-import InputField from '../components/InputField'
-import Button from '../components/Button'
-import HyperLink from '../components/HyperLink';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { userLogin } from './../redux/actions';
-import { storeData, getData } from "./../redux/asyncStorage"
+
+import InputField from '@components/InputField'
+import Button from '@components/Button'
+import HyperLink from '@components/HyperLink';
 import { useLoginMutation } from '@redux/slices/userApiSlice'
 import { setCredentials } from '@redux/slices/authSlice'
 

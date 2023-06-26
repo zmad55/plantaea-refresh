@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
-import ListPlant from '../components/plant-library-screen/PlantListItem'
-import InitiateCategoryTabs from "../components/plant-library-screen/PlantLibraryScreen-CategoryTabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import { plantListLibrary } from '../data/plantData'
+import ListPlant from '@components/plant-library-screen/PlantListItem'
+import InitiateCategoryTabs from "@components/plant-library-screen/PlantLibraryScreen-CategoryTabs";
+import { plantListLibrary } from '@data/plantData'
 
 const PlantLibraryScreen = ({ navigation, route }) => {
 

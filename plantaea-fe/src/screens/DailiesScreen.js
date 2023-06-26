@@ -1,23 +1,23 @@
 import React from "react";
 import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
 
-import { activities } from '../data/dailyActivities'
+import { activities } from '@data/dailyActivities'
 
-import ListActiviy from "../components/dailies-screen/DailiesScreen-Activities";
+import ListActiviy from "@components/dailies-screen/DailiesScreen-Activities";
 
 export default function DailiesScreen({ navigation }) {
   return (
     <SafeAreaView>
       <ScrollView className="mt-10">
-        <View className="flex-1 items-center">
+        <View className="items-center flex-1">
           <Image
             source={require('../assets/images/gamepad.png')}
             resizeMode="contain"
-            className="h-20 w-20"
+            className="w-20 h-20"
           />
-          <Text className="font-bold text-2xl text-green-700">DAILIES</Text>
+          <Text className="text-2xl font-bold text-green-700">DAILIES</Text>
         </View>
-        <View className="p-2 border-t-2 border-t-slate-200 mt-5" />
+        <View className="p-2 mt-5 border-t-2 border-t-slate-200" />
         {activities.map(e => (
           <ListActiviy key={e.id} title={e.title} total={e.total} />
         ))

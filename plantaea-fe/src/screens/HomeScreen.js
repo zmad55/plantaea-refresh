@@ -5,13 +5,11 @@ import React, { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FlipCard from 'react-native-flip-card'
 
-
-import { storeData, getData } from "./../redux/asyncStorage"
 import { useDispatch, useSelector } from 'react-redux'
 
-import FeaturedPlantCardFront from '../components/home-screen/FeaturedPlantCardFront';
-import FeaturedPlantCardBack from '../components/home-screen/FeaturedPlantCardBack';
-import DirectoryCard from '../components/home-screen/HomeScreen-Directories'
+import FeaturedPlantCardFront from '@components/home-screen/FeaturedPlantCardFront';
+import FeaturedPlantCardBack from '@components/home-screen/FeaturedPlantCardBack';
+import DirectoryCard from '@components/home-screen/HomeScreen-Directories'
 
 const HomeScreen = ({ navigation }) => {
 

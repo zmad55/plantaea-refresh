@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { View, Text, Image, SafeAreaView, StatusBar } from "react-native";
-
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import * as Animatable from 'react-native-animatable';
 
@@ -29,19 +28,19 @@ const PlantDetailsScreen = ({ navigation, route }) => {
         )}
 
         renderForeground={() => (
-          <View className="flex-1 align-stretch justify-center items-center">
+          <View className="items-center justify-center flex-1 align-stretch">
             <Text className="text-3xl font-bold text-white">{route.params?.localName}</Text>
             <Text className="italic text-white align-center">{route.params?.scientificName}</Text>
           </View>
         )}
         renderFixedForeground={() => (
           <View>
-            {/* <TouchableOpacity className="relative top-3 left-3 z-590 w-12 h-12 rounded-full bg-white items-center justify-center"
+            {/* <TouchableOpacity className="relative items-center justify-center w-12 h-12 bg-white rounded-full top-3 left-3 z-590"
               onPress={() => navigation.navigate('Plant Library')}>
               <MaterialCommunityIcons name="arrow-left-bold-circle" size={40} color="green" />
             </TouchableOpacity> */}
-            <Animatable.View className="h-1/4 justify-center items-center pt-40 opacity-0" ref={navTitleView}>
-              <Text className="text-white text-base bg-transparent">{route.params?.localName}</Text>
+            <Animatable.View className="items-center justify-center pt-40 opacity-0 h-1/4" ref={navTitleView}>
+              <Text className="text-base text-white bg-transparent">{route.params?.localName}</Text>
             </Animatable.View>
           </View>
         )}
@@ -53,13 +52,13 @@ const PlantDetailsScreen = ({ navigation, route }) => {
             onDisplay={() => navTitleView.current.fadeOut(100)}
           >
           </TriggeringView>
-          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Description</Text>
-          <Text className="p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.description}</Text>
-          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Use</Text>
-          <Text className="p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.use}</Text>
-          <Text className="text-3xl p-3 pb-2 border-b-2 border-b-slate-300 bg-white">Taxonomy</Text>
+          <Text className="p-3 pb-2 text-3xl bg-white border-b-2 border-b-slate-300">Description</Text>
+          <Text className="p-3 pb-2 bg-white border-b-2 border-b-slate-300">{route.params?.description}</Text>
+          <Text className="p-3 pb-2 text-3xl bg-white border-b-2 border-b-slate-300">Use</Text>
+          <Text className="p-3 pb-2 bg-white border-b-2 border-b-slate-300">{route.params?.use}</Text>
+          <Text className="p-3 pb-2 text-3xl bg-white border-b-2 border-b-slate-300">Taxonomy</Text>
 
-          <Text className="text-xs p-3 pb-2 border-b-2 border-b-slate-300 bg-white">{route.params?.taxonomy}</Text>
+          <Text className="p-3 pb-2 text-xs bg-white border-b-2 border-b-slate-300">{route.params?.taxonomy}</Text>
         </SafeAreaView>
       </ImageHeaderScrollView>
     </View>
