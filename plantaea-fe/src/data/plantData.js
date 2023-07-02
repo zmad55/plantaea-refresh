@@ -62,7 +62,6 @@ export const plantListLibrary = [
         latitude: 16.6170,
         longitude: 120.8269
     },
-
 ]
 
 export const MarketListLibrary = [

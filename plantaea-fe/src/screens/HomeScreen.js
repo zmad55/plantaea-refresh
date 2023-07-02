@@ -44,10 +44,10 @@ const HomeScreen = ({ navigation }) => {
                     <View className="flex-1 mx-2 mb-5">
                         <View className="flex-row justify-evenly">
                             <DirectoryCard
-                                iconName={"scan-circle-sharp"}
-                                title="SCAN"
-                                description="Identify Leaves"
-                                onPressAction={() => navigation.navigate('CameraStack')}
+                                iconName={"journal-sharp"}
+                                title="Guide"
+                                description="Getting Started"
+                                onPressAction={() => navigation.navigate('?')}
                             />
                             <DirectoryCard
                                 iconName={"map-sharp"}
@@ -58,16 +58,10 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                         <View className="flex-row pt-5 justify-evenly">
                             <DirectoryCard
-                                iconName={"library-sharp"}
-                                title="LIBRARY"
-                                description="Browse Plants"
-                                onPressAction={() => navigation.navigate('LibraryStack')}
-                            />
-                            <DirectoryCard
-                                iconName={"journal-sharp"}
-                                title="Guide"
-                                description="Getting Started"
-                                onPressAction={() => navigation.navigate('--')}
+                                iconName={"scan-circle-sharp"}
+                                title="SCAN"
+                                description="Identify Leaves"
+                                onPressAction={() => navigation.navigate('CameraStack')}
                             />
                         </View>
                     </View>

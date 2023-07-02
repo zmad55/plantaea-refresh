@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import User from "./routers/userRoutes.js";
+import Plant from "./routers/plantRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 import cors from "cors";
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/user", User);
+app.use("/api/plant", Plant);
 app.use(notFound)
 app.use(errorHandler)
 

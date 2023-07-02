@@ -18,14 +18,14 @@ export default function InitiateCategoryTabs({
     }
 
     const options = [
-        { label: option1, color: "green-600", value: 1 },
+        { label: option1, color: "green-800", value: 1 },
         { label: option2, color: "red-400", value: 2 },
         { label: option3, color: "yellow-500", value: 3 },
         { label: option4, color: "pink-400", value: 4 }
     ];
 
     return (
-        <View className="h-14 w-full bg-white flex-row justify-center">
+        <View className="flex-row justify-center w-full bg-white h-14">
             {options.map((option, index) => (
                 <TouchableOpacity
                     key={index}
