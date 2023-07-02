@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native'
-import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import ListPlant from '@components/plant-library-screen/PlantListItem'
