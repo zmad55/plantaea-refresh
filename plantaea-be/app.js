@@ -27,6 +27,7 @@ app.use(cookieParser());
 
 app.use("/api/user", User);
 app.use("/api/plant", Plant);
+app.use("/uploads/plantImages", express.static('upload/plantImages'))
 app.use(notFound)
 app.use(errorHandler)
 

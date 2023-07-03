@@ -10,7 +10,7 @@ export const plantListLibrary = [
         use: 'Used as treatment for wounds, cough, colds, etc.',
         taxonomy: 'Plants (Kingdom Plantae)\n ⤷Vascular Plants (Phylum Tracheophyta)\n ⤷Flowering Plants (Subphylum Angiospermae)\n ⤷Monocots (Class Liliopsida)\n ⤷Agaves, Orchids, Irises, and Allies (Order Asparagales)\n ⤷Amaryllis, Onions, and Allies (Family Amaryllidaceae)\n ⤷Subfamily Allioideae\n ⤷Tribe Allieae\n ⤷Onions (Genus Allium)\n ⤷Subgenus Butomissa\n ⤷Allium ramosum',
         //image: require('../../assets/images/plants/allium_ramosum.jpg'),
-        image: require('../..//assets/images/plants/allium-sativum.jpg'),
+        image: require('../../assets/images/plants/allium-sativum.jpg'),
         latitude: 16.3450,
         longitude: 120.6890
     },
