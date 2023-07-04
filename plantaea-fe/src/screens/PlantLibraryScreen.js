@@ -1,12 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useDispatch, useSelector } from "react-redux";
 
 import ListPlant from '@components/plant-library-screen/PlantListItem'
 import InitiateCategoryTabs from "@components/plant-library-screen/PlantLibraryScreen-CategoryTabs";
 import { plantListLibrary } from '@data/plantData'
 
+import { useFetchPlantsDataQuery } from '@redux/slices/plantApiSlice'
+import { setPlantsData } from '@redux/slices/plantSlice'
+
 const PlantLibraryScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  const { data: fetchedPlants, isLoading, isError } = useFetchPlantsDataQuery();
+
+  useEffect(() => {
+    if (fetchedPlants) {
+      dispatch(setPlantsData(fetchedPlants));
+    }
+  }, [dispatch, fetchedPlants]);
+
+  const { plantsData } = useSelector((state) => state.plantlib);
+
+  console.log(plantsData)
 
   const [descriptionTab, setDescriptionTab] = useState(1);
 
