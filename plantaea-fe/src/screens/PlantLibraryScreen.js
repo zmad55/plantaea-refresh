@@ -21,8 +21,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   }, [dispatch, fetchedPlants]);
 
   const { plantsData } = useSelector((state) => state.plantlib);
-
-  console.log(plantsData)
+  const plants = plantsData.plantsData
 
   const [descriptionTab, setDescriptionTab] = useState(1);
 
@@ -36,7 +35,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
       image={item.image}
       scientificName={item.scientificName}
       localName={item.localName}
-      category={item.category}
+      category={item.category.flat()}
       onPress={() =>
         navigation.navigate("Plant Details", {
           image: item.image,
@@ -83,25 +82,25 @@ const PlantLibraryScreen = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
         <View>
-          {descriptionTab === 1 && <View>{plantListLibrary.map(renderPlantListItem)}</View>}
+          {descriptionTab === 1 && <View>{plants.map(renderPlantListItem)}</View>}
           {descriptionTab === 2 && (
             <View>
-              {plantListLibrary
-                .filter((item) => item.category[0] === "medicine")
+              {plants
+                .filter((item) => item.category.flat()[0] === "medicine")
                 .map(renderPlantListItem)}
             </View>
           )}
           {descriptionTab === 3 && (
             <View>
-              {plantListLibrary
-                .filter((item) => item.category.includes("consumable"))
+              {plants
+                .filter((item) => item.category.flat().includes("consumable"))
                 .map(renderPlantListItem)}
             </View>
           )}
           {descriptionTab === 4 && (
             <View>
-              {plantListLibrary
-                .filter((item) => item.category.includes("ornamental"))
+              {plants
+                .filter((item) => item.category.flat().includes("ornamental"))
                 .map(renderPlantListItem)}
             </View>
           )}
