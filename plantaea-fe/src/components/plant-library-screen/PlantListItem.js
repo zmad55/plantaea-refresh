@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import baseQuery from "@redux/slices/apiSlice";
+import { API_BASE_URL } from "@config/urls"
 
 export default function ListPlant({ image, scientificName, localName, category, onPress }) {
+    const [plantImage, setPlantImage] = useState(null);
+
+    useEffect(() => {
+        const fetchPlantsData = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/uploads/plantImages/${image}`);
+                if (response.ok) {
+                    const plantImageData = await response.blob();
+                    const url = URL.createObjectURL(plantImageData)
+                    setPlantImage(url)
+                }
+            } catch (error) {
+                console.error('Error fetching plant image:', error);
+            }
+        };
+
+        fetchPlantsData();
+    }, []);
+
     return (
         <View>
             <View className="flex-row items-center flex-1">
-                <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 bg-white rounded-2xl shadow-md p-3 m-1">
-                    <Image source={image} className="w-14 h-14 rounded-full mr-4" />
+                <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 p-3 m-1 bg-white shadow-md rounded-2xl">
+                    <Image source={plantImage} className="mr-4 rounded-full w-14 h-14" />
                     <View>
-                        <Text className="font-josesans text-black">{localName}</Text>
-                        <Text className="font-josesans italic text-emerald-500 text-xs">{scientificName}</Text>
+                        <Text className="text-black font-josesans">{localName}</Text>
+                        <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>
                         <View className="flex-row">
                             {(() => {
                                 switch (true) {

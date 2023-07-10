@@ -22,6 +22,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
 
   const { plantsData } = useSelector((state) => state.plantlib);
   const plants = plantsData.plantsData
+  // console.log(plants)
 
   const [descriptionTab, setDescriptionTab] = useState(1);
 
@@ -32,13 +33,13 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   const renderPlantListItem = (item) => (
     <ListPlant
       key={item.id}
-      image={item.image}
+      image={item.imgFileName}
       scientificName={item.scientificName}
       localName={item.localName}
       category={item.category.flat()}
       onPress={() =>
         navigation.navigate("Plant Details", {
-          image: item.image,
+          image: item.imgFileName,
           scientificName: item.scientificName,
           localName: item.localName,
           description: item.description,
