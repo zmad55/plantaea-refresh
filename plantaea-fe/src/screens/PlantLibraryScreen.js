@@ -3,12 +3,13 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Ima
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useDispatch, useSelector } from "react-redux";
 
-import ListPlant from '@components/plant-library-screen/PlantListItem'
-import InitiateCategoryTabs from "@components/plant-library-screen/PlantLibraryScreen-CategoryTabs";
-import { plantListLibrary } from '@data/plantData'
+import ListPlant from '@components/plantLibraryScreen/ListPlant'
+import CategoryTab from "@components/plantLibraryScreen/CategoryTab";
 
 import { useFetchPlantsDataQuery } from '@redux/slices/plantApiSlice'
 import { setPlantsData } from '@redux/slices/plantSlice'
+
+import store from '@redux/store'
 
 const PlantLibraryScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   }, [dispatch, fetchedPlants]);
 
   const { plantsData } = useSelector((state) => state.plantlib);
-  const plants = plantsData.plantsData
+  console.log(plantsData)
+  // const plants = plantsData.plantsData
   // console.log(plants)
 
   const [descriptionTab, setDescriptionTab] = useState(1);
@@ -59,7 +61,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
           PLANT LIBRARY
         </Text>
         <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
-          <InitiateCategoryTabs
+          <CategoryTab
             selectionMode={1}
             option1="All"
             option2="Medicine"

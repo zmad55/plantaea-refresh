@@ -7,9 +7,9 @@ import FlipCard from 'react-native-flip-card'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import FeaturedPlantCardFront from '@components/home-screen/FeaturedPlantCardFront';
-import FeaturedPlantCardBack from '@components/home-screen/FeaturedPlantCardBack';
-import DirectoryCard from '@components/home-screen/HomeScreen-Directories'
+import FeaturedPlantCardFront from '@components/homeScreen/FeaturedPlantCardFront';
+import FeaturedPlantCardBack from '@components/homeScreen/FeaturedPlantCardBack';
+import DirectoryCard from '@components/homeScreen/DirectoryCard'
 
 const HomeScreen = ({ navigation }) => {
 

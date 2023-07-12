@@ -11,9 +11,12 @@ export default function ListPlant({ image, scientificName, localName, category, 
             try {
                 const response = await fetch(`${API_BASE_URL}/uploads/plantImages/${image}`);
                 if (response.ok) {
-                    const plantImageData = await response.blob();
-                    const url = URL.createObjectURL(plantImageData)
-                    setPlantImage(url)
+                    const data = await response.blob();
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setPlantImage(reader.result);
+                    };
+                    reader.readAsDataURL(data);
                 }
             } catch (error) {
                 console.error('Error fetching plant image:', error);

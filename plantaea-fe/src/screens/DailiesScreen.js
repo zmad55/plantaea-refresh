@@ -2,8 +2,7 @@ import React from "react";
 import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
 
 import { activities } from '@data/dailyActivities'
-
-import ListActiviy from "@components/dailies-screen/DailiesScreen-Activities";
+import ListActivity from "@components/dailiesScreen/ListActivity";
 
 export default function DailiesScreen({ navigation }) {
   return (
@@ -19,7 +18,7 @@ export default function DailiesScreen({ navigation }) {
         </View>
         <View className="p-2 mt-5 border-t-2 border-t-slate-200" />
         {activities.map(e => (
-          <ListActiviy key={e.id} title={e.title} total={e.total} />
+          <ListActivity key={e.id} title={e.title} total={e.total} />
         ))
         }
       </ScrollView>
