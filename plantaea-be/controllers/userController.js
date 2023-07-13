@@ -4,7 +4,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from "bcrypt"
 
 // @desc    Create new user account
-// @route   GET api/user/register
+// @route   POST api/user/register
 // @access  Private
 export const userRegister = asyncHandler(async (req, res) => {
     const { username, password } = req.body;

@@ -61,7 +61,7 @@ export default function ListPlant({ image, scientificName, localName, category, 
     )
 }
 
-export function createPlantTag(isMedicine, isConsumable, isAromatic) {
+function createPlantTag(isMedicine, isConsumable, isAromatic) {
     return (
         <View className="flex-row">
             {isMedicine && (

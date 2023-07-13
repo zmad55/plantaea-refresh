@@ -1,40 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  ActivityIndicator,
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 
-import ListPlant from '@components/plantLibraryScreen/ListPlant'
+import ListPlant from "@components/plantLibraryScreen/ListPlant";
 import CategoryTab from "@components/plantLibraryScreen/CategoryTab";
 
-import { useFetchPlantsDataQuery } from '@redux/slices/plantApiSlice'
-import { setPlantsData } from '@redux/slices/plantSlice'
-
-import store from '@redux/store'
+import { useFetchPlantsDataQuery } from "@redux/slices/plantApiSlice";
+import { setPlantsData } from "@redux/slices/plantSlice";
 
 const PlantLibraryScreen = ({ navigation, route }) => {
-  const dispatch = useDispatch();
-  const { data: fetchedPlants, isLoading, isError } = useFetchPlantsDataQuery();
-
-  useEffect(() => {
-    if (fetchedPlants) {
-      dispatch(setPlantsData(fetchedPlants));
-    }
-  }, [dispatch, fetchedPlants]);
-
-  const { plantsData } = useSelector((state) => state.plantlib);
-  console.log(plantsData)
-  // const plants = plantsData.plantsData
-  // console.log(plants)
+  const { data: plants, isLoading, isError } = useFetchPlantsDataQuery();
+  console.log(plants);
 
   const [descriptionTab, setDescriptionTab] = useState(1);
-
   const onSelectSwitch = (value) => {
     setDescriptionTab(value);
-  }
+  };
 
   const renderPlantListItem = (item) => (
     <ListPlant
-      key={item.id}
+      key={item._id}
       image={item.imgFileName}
       scientificName={item.scientificName}
       localName={item.localName}
@@ -56,63 +52,98 @@ const PlantLibraryScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView className="flex-1 bg-gray-200">
-      <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl">
-        <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
-          PLANT LIBRARY
-        </Text>
-        <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
-          <CategoryTab
-            selectionMode={1}
-            option1="All"
-            option2="Medicine"
-            option3="Consumable"
-            option4="Ornamental"
-            onSelectSwitch={onSelectSwitch}
-          />
-        </View>
-      </View>
-      <ScrollView className="px-4 rounded-t-2xl">
-        <View className="my-2">
-          <TouchableOpacity
-            className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-full shadow-md"
-            onPress={() => navigation.navigate('PlantLibraryStack')}
-          >
-            <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">Search plant</Text>
-            <Ionicons
-              name="search-sharp"
-              size={22}
-              className="mr-0 text-emerald-500" />
-          </TouchableOpacity>
-        </View>
+      {isLoading && <ActivityIndicator animating={true} color="darkgreen" />}
+      {!isLoading && isError ? (
+        <Text>Error in fetching plants data...</Text>
+      ) : null}
+      {!isLoading && plants.length ? (
         <View>
-          {descriptionTab === 1 && <View>{plants.map(renderPlantListItem)}</View>}
-          {descriptionTab === 2 && (
-            <View>
-              {plants
-                .filter((item) => item.category.flat()[0] === "medicine")
-                .map(renderPlantListItem)}
+          <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl">
+            <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
+              PLANT LIBRARY
+            </Text>
+            <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
+              <CategoryTab
+                selectionMode={1}
+                option1="All"
+                option2="Medicine"
+                option3="Consumable"
+                option4="Ornamental"
+                onSelectSwitch={onSelectSwitch}
+              />
             </View>
-          )}
-          {descriptionTab === 3 && (
-            <View>
-              {plants
-                .filter((item) => item.category.flat().includes("consumable"))
-                .map(renderPlantListItem)}
+          </View>
+          <ScrollView className="px-4 rounded-t-2xl">
+            <View className="my-2">
+              <TouchableOpacity
+                className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-full shadow-md"
+                onPress={() => navigation.navigate("PlantLibraryStack")}
+              >
+                <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">
+                  Search plant
+                </Text>
+                <Ionicons
+                  name="search-sharp"
+                  size={22}
+                  className="mr-0 text-emerald-500"
+                />
+              </TouchableOpacity>
             </View>
-          )}
-          {descriptionTab === 4 && (
             <View>
-              {plants
-                .filter((item) => item.category.flat().includes("ornamental"))
-                .map(renderPlantListItem)}
+              {descriptionTab === 1 && (
+                <View>{plants.map(renderPlantListItem)}</View>
+              )}
+              {descriptionTab === 2 && (
+                <View>
+                  {plants
+                    .filter((item) =>
+                      item.category.flat().includes("medicine")
+                    )
+                    .map(renderPlantListItem)}
+                </View>
+              )}
+              {descriptionTab === 3 && (
+                <View>
+                  {plants
+                    .filter((item) =>
+                      item.category.flat().includes("consumable")
+                    )
+                    .map(renderPlantListItem)}
+                </View>
+              )}
+              {descriptionTab === 4 && (
+                <View>
+                  {plants
+                    .filter((item) =>
+                      item.category.flat().includes("ornamental")
+                    )
+                    .map(renderPlantListItem)}
+                </View>
+              )}
             </View>
-          )}
+            <View className="mt-20 padding-2 border-t-1 border-t-white" />
+          </ScrollView>
         </View>
-        <View className="mt-20 padding-2 border-t-1 border-t-white" />
-      </ScrollView>
-    </SafeAreaView >
-  )
+      ) : null}
+    </SafeAreaView>
+  );
+};
+
+const renderPlants = (descriptionTab) => {
+  const filteredPlants = plants.filter((plant) => {
+    if (descriptionTab === 1) {
+      return true;
+    } else if (descriptionTab === 2 && plant.category.includes("medicine")) {
+      return true;
+    } else if (descriptionTab === 3 && plant.category.includes("consumable")) {
+      return true;
+    } else if (descriptionTab === 4 && plant.category.includes("ornamental")) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return filteredPlants.map(renderPlantListItem);
 }
 
-
-export default PlantLibraryScreen
+export default PlantLibraryScreen;

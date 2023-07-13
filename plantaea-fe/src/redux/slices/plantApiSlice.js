@@ -11,7 +11,7 @@ export const plantApiSlice = apiSlice.injectEndpoints({
             })
         })
     }),
-    overrideExisting: false,
+    overrideExisting: true,
 })
 
 export const { useFetchPlantsDataQuery } = plantApiSlice;

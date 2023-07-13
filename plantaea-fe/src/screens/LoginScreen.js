@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import InputField from '@components/InputField'
 import Button from '@components/Button'
 import HyperLink from '@components/HyperLink';
+
 import { useLoginMutation } from '@redux/slices/userApiSlice'
 import { setCredentials } from '@redux/slices/authSlice'
 
@@ -16,12 +17,12 @@ export default function LoginScreen() {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
-    const [username, setUsername] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const [login, { isLoading, error }] = useLoginMutation();
 
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.auth);
 
     const loginHandler = async (e) => {
         e.preventDefault();

@@ -34,8 +34,7 @@ export default function InitiateCategoryTabs({
                     className={`${getSelectionMode === option.value ? "bg-" + option.color : 'bg-' + option.color + ' opacity-50'}
                                 ${getSelectionMode === option.value ? "mt-0" : "mt-4"} 
                                 flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center
-                                `}
-                >
+                                `}>
                     <Text
                         className={`${getSelectionMode === option.value ? "text-white text-sm font-josesans-reg" : "text-gray-600 text-xs font-josesans-reg"}`}
                     >
