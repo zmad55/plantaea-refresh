@@ -10,19 +10,14 @@ export default function ListPlant({ image, scientificName, localName, category, 
         const fetchPlantsData = async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/uploads/plantImages/${image}`);
+                const imageURL = response.url
                 if (response.ok) {
-                    const data = await response.blob();
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        setPlantImage(reader.result);
-                    };
-                    reader.readAsDataURL(data);
+                    setPlantImage(imageURL)
                 }
             } catch (error) {
                 console.error('Error fetching plant image:', error);
             }
         };
-
         fetchPlantsData();
     }, []);
 
@@ -30,7 +25,7 @@ export default function ListPlant({ image, scientificName, localName, category, 
         <View>
             <View className="flex-row items-center flex-1">
                 <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 p-3 m-1 bg-white shadow-md rounded-2xl">
-                    <Image source={plantImage} className="mr-4 rounded-full w-14 h-14" />
+                    <Image source={{ uri: plantImage }} className="mr-4 rounded-full w-14 h-14" />
                     <View>
                         <Text className="text-black font-josesans">{localName}</Text>
                         <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>

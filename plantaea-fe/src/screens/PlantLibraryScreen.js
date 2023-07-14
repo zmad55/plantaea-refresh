@@ -5,9 +5,6 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  StyleSheet,
-  Image,
-  ImageBackground,
   ActivityIndicator,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -21,7 +18,6 @@ import { setPlantsData } from "@redux/slices/plantSlice";
 
 const PlantLibraryScreen = ({ navigation, route }) => {
   const { data: plants, isLoading, isError } = useFetchPlantsDataQuery();
-  console.log(plants);
 
   const [descriptionTab, setDescriptionTab] = useState(1);
   const onSelectSwitch = (value) => {
@@ -52,13 +48,17 @@ const PlantLibraryScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView className="flex-1 bg-gray-200">
-      {isLoading && <ActivityIndicator animating={true} color="darkgreen" />}
+      {isLoading &&
+        <View className="flex flex-col items-center justify-center h-full">
+          <ActivityIndicator animating={true} color="darkgreen" size="large" />
+        </View>
+      }
       {!isLoading && isError ? (
         <Text>Error in fetching plants data...</Text>
       ) : null}
       {!isLoading && plants.length ? (
         <View>
-          <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl">
+          <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl mb-2">
             <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
               PLANT LIBRARY
             </Text>
@@ -72,11 +72,9 @@ const PlantLibraryScreen = ({ navigation, route }) => {
                 onSelectSwitch={onSelectSwitch}
               />
             </View>
-          </View>
-          <ScrollView className="px-4 rounded-t-2xl">
-            <View className="my-2">
+            <View className="mb-4 w-full px-5">
               <TouchableOpacity
-                className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-full shadow-md"
+                className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-xl shadow-md"
                 onPress={() => navigation.navigate("PlantLibraryStack")}
               >
                 <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">
@@ -89,6 +87,8 @@ const PlantLibraryScreen = ({ navigation, route }) => {
                 />
               </TouchableOpacity>
             </View>
+          </View>
+          <ScrollView className="px-4 rounded-t-2xl">
             <View>
               {descriptionTab === 1 && (
                 <View>{plants.map(renderPlantListItem)}</View>
