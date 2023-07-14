@@ -46,7 +46,7 @@ const PlantDetailsScreen = ({ navigation, route }) => {
         )}
 
       >
-        <SafeAreaView className="p-2.5 bg-white mb-2.5">
+        <SafeAreaView className="p-2 bg-white mb-20">
           <TriggeringView
             onHide={() => navTitleView.current.fadeInUp(200)}
             onDisplay={() => navTitleView.current.fadeOut(100)}

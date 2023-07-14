@@ -6,6 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  StatusBar,
+  Platform
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,84 +49,86 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-200">
-      {isLoading &&
-        <View className="flex flex-col items-center justify-center h-full">
-          <ActivityIndicator animating={true} color="darkgreen" size="large" />
-        </View>
-      }
-      {!isLoading && isError ? (
-        <Text>Error in fetching plants data...</Text>
-      ) : null}
-      {!isLoading && plants.length ? (
-        <View>
-          <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl mb-2">
-            <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
-              PLANT LIBRARY
-            </Text>
-            <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
-              <CategoryTab
-                selectionMode={1}
-                option1="All"
-                option2="Medicine"
-                option3="Consumable"
-                option4="Ornamental"
-                onSelectSwitch={onSelectSwitch}
-              />
-            </View>
-            <View className="mb-4 w-full px-5">
-              <TouchableOpacity
-                className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-xl shadow-md"
-                onPress={() => navigation.navigate("PlantLibraryStack")}
-              >
-                <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">
-                  Search plant
-                </Text>
-                <Ionicons
-                  name="search-sharp"
-                  size={22}
-                  className="mr-0 text-emerald-500"
-                />
-              </TouchableOpacity>
-            </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white", paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+      <View className="bg-gray-200 pb-10">
+        {isLoading &&
+          <View className="flex flex-col items-center justify-center h-full">
+            <ActivityIndicator animating={true} color="darkgreen" size="large" />
           </View>
-          <ScrollView className="px-4 rounded-t-2xl">
-            <View>
-              {descriptionTab === 1 && (
-                <View>{plants.map(renderPlantListItem)}</View>
-              )}
-              {descriptionTab === 2 && (
-                <View>
-                  {plants
-                    .filter((item) =>
-                      item.category.flat().includes("medicine")
-                    )
-                    .map(renderPlantListItem)}
-                </View>
-              )}
-              {descriptionTab === 3 && (
-                <View>
-                  {plants
-                    .filter((item) =>
-                      item.category.flat().includes("consumable")
-                    )
-                    .map(renderPlantListItem)}
-                </View>
-              )}
-              {descriptionTab === 4 && (
-                <View>
-                  {plants
-                    .filter((item) =>
-                      item.category.flat().includes("ornamental")
-                    )
-                    .map(renderPlantListItem)}
-                </View>
-              )}
+        }
+        {!isLoading && isError ? (
+          <Text>Error in fetching plants data...</Text>
+        ) : null}
+        {!isLoading && plants.length ? (
+          <View>
+            <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl mb-2">
+              <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
+                PLANT LIBRARY
+              </Text>
+              <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
+                <CategoryTab
+                  selectionMode={1}
+                  option1="All"
+                  option2="Medicine"
+                  option3="Consumable"
+                  option4="Ornamental"
+                  onSelectSwitch={onSelectSwitch}
+                />
+              </View>
+              <View className="mb-4 w-full px-5">
+                <TouchableOpacity
+                  className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-xl shadow-md"
+                  onPress={() => navigation.navigate("PlantLibraryStack")}
+                >
+                  <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">
+                    Search plant
+                  </Text>
+                  <Ionicons
+                    name="search-sharp"
+                    size={22}
+                    className="mr-0 text-emerald-500"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View className="mt-20 padding-2 border-t-1 border-t-white" />
-          </ScrollView>
-        </View>
-      ) : null}
+            <ScrollView className="px-4 rounded-t-2xl">
+              <View>
+                {descriptionTab === 1 && (
+                  <View>{plants.map(renderPlantListItem)}</View>
+                )}
+                {descriptionTab === 2 && (
+                  <View>
+                    {plants
+                      .filter((item) =>
+                        item.category.flat().includes("medicine")
+                      )
+                      .map(renderPlantListItem)}
+                  </View>
+                )}
+                {descriptionTab === 3 && (
+                  <View>
+                    {plants
+                      .filter((item) =>
+                        item.category.flat().includes("consumable")
+                      )
+                      .map(renderPlantListItem)}
+                  </View>
+                )}
+                {descriptionTab === 4 && (
+                  <View>
+                    {plants
+                      .filter((item) =>
+                        item.category.flat().includes("ornamental")
+                      )
+                      .map(renderPlantListItem)}
+                  </View>
+                )}
+              </View>
+              <View className="mt-20 padding-2 border-t-1 border-t-white" />
+            </ScrollView>
+          </View>
+        ) : null}
+      </View>
     </SafeAreaView>
   );
 };

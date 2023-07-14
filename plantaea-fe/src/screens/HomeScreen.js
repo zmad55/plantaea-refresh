@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView, Image, Platform, StatusBar } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import React, { useState, useEffect } from 'react';
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
     const username = userInfo.user.charAt(0).toUpperCase() + userInfo.user.slice(1);
 
     return (
-        <SafeAreaView className="flex-1 bg-white">
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white", paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
             <View className="flex-1 mt-6 bg-gray-200">
                 <View className="p-2 bg-white rounded-b-3xl">
                     <Text className="text-2xl font-light tracking-widest self-left text-emerald-800 font-josesans-reg">Good Day {username}</Text>
