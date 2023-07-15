@@ -31,22 +31,10 @@ export default function ListPlant({ image, scientificName, localName, category, 
                         <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>
                         <View className="flex-row">
                             {(() => {
-                                switch (true) {
-                                    case category[0] === 'medicine' && category[1] === 'consumable' && category[2] === 'ornamental':
-                                        return createPlantTag(true, true, true);
-                                    case category[0] === 'medicine' && category[1] === 'consumable':
-                                        return createPlantTag(true, true);
-                                    case category[0] === 'medicine' && category[1] === 'ornamental':
-                                        return createPlantTag(true, false, true);
-                                    case category[0] === 'consumable' && category[1] === 'ornamental':
-                                        return createPlantTag(false, true, true);
-                                    case category[0] === 'medicine':
-                                        return createPlantTag(true);
-                                    case category[0] === 'consumable':
-                                        return createPlantTag(false, true);
-                                    default:
-                                        return createPlantTag(false, false, true);
-                                }
+                                const hasMedicine = category.includes('medicine');
+                                const hasConsumable = category.includes('consumable');
+                                const hasOrnamental = category.includes('ornamental');
+                                return createPlantTag(hasMedicine, hasConsumable, hasOrnamental);
                             })()}
                         </View>
                     </View>

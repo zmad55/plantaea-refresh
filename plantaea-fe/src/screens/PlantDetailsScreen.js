@@ -1,7 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { View, Text, Image, SafeAreaView, StatusBar } from "react-native";
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+
 import { API_BASE_URL } from "@config/urls"
+import CategoryTab from "@components/plantLibraryScreen/CategoryTab";
+
 
 const MIN_HEIGHT = 70;
 const MAX_HEIGHT = 350;
@@ -16,7 +19,6 @@ const PlantDetailsScreen = ({ navigation, route }) => {
   // }
 
   const [plantImage, setPlantImage] = useState(null);
-
   useEffect(() => {
     const fetchPlantsData = async () => {
       try {
@@ -32,18 +34,38 @@ const PlantDetailsScreen = ({ navigation, route }) => {
     fetchPlantsData();
   }, []);
 
+  const [descriptionTab, setDescriptionTab] = useState(1);
+  const onSelectSwitch = (value) => {
+    setDescriptionTab(value);
+  };
+
   return (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View className="h-2/5">
         <Image
-        className="w-full h-full"
+          className="w-full h-full"
           source={{ uri: plantImage }} />
       </View>
       <View className="flex-1 bg-gray-200 rounded-t-3xl -mt-16 p-5">
         <View className="flex-row">
           <Text className="font-josesans-reg font-bold tracking-wide text-2xl">{route.params?.localName}</Text>
-          <View className="w-2"/>
+          <View className="w-2" />
           <Text className="font-josesans tracking-wide text-lg">({route.params?.scientificName})</Text>
+        </View>
+        <View className="flex-row items-center justify-between px-8 mt-6 rounded-md">
+          <CategoryTab
+            selectionMode={1}
+            // option1="All"
+            // option2="Medicine"
+            // option3="Consumable"
+            // option4="Ornamental"
+            optionsData={[
+              { label: "All", color: "green-800", value: 1 },
+              { label: "Medicine", color: "red-400", value: 2 },
+              { label: "Consumable", color: "yellow-500", value: 3 },
+              { label: "Ornamental", color: "pink-400", value: 4 }]}
+            onSelectSwitch={onSelectSwitch}
+          />
         </View>
       </View>
     </SafeAreaView>

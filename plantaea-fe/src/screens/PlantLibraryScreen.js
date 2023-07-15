@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator, StatusBar, Platform } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator, StatusBar, Platform, FLatList } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ import { setPlantsData } from "@redux/slices/plantSlice";
 const PlantLibraryScreen = ({ navigation, route }) => {
   const { data: plants, isLoading, isError } = useFetchPlantsDataQuery();
 
-  const [descriptionTab, setDescriptionTab] = useState(1);
+  const [descriptionTab, setDescriptionTab] = useState("all");
   const onSelectSwitch = (value) => {
     setDescriptionTab(value);
   };
@@ -39,6 +39,41 @@ const PlantLibraryScreen = ({ navigation, route }) => {
     />
   );
 
+  const [uniqueCategories, setUniqueCategories] = useState([]);
+  useEffect(() => {
+    if (!isLoading) {
+      const categories = plants.map(item => item.category.flat())
+      const uniqueCategoriesSet = new Set();
+      categories.forEach(items => {
+        items.forEach(item => {
+          uniqueCategoriesSet.add(item)
+        })
+      })
+      const uniqueCategoriesData = Array.from(uniqueCategoriesSet)
+      uniqueCategoriesData.push("all")
+      setUniqueCategories(uniqueCategoriesData)
+      console.log(uniqueCategoriesData)
+    }
+  }, [isLoading, plants]);
+
+  // const [plantList, setPlantList] = useState(null);
+  // const filterPlantsByCategory = (descriptionTab) => {
+  //   if (descriptionTab !== "all") {
+  //     setPlantList([...plants.filter(e => e.category.flat().includes(descriptionTab))])
+  //   } else {
+  //     setPlantList(plants)
+  //   }
+  // }
+
+  const filterPlantsByCategory = (descriptionTab) => {
+    if (descriptionTab !== "all") {
+      return (<View className="">{plants.filter((item) => item.category.flat().includes(descriptionTab)).map(renderPlantListItem)}</View>)
+    } else {
+      return <View className="my-5">{plants.map(renderPlantListItem)}</View>
+    }
+  };
+
+  // {plants.filter((item) => item.category.flat().includes("medicine")).map(renderPlantListItem)}
   return (
     <SafeAreaView className="flex-1 pt-10 bg-white">
       <View className="bg-gray-200 h-full">
@@ -56,16 +91,16 @@ const PlantLibraryScreen = ({ navigation, route }) => {
               <Text className="text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">PLANT LIBRARY</Text>
               <View className="flex-row items-center justify-between px-8 mt-6 rounded-md">
                 <CategoryTab
-                  selectionMode={1}
+                  selectionMode={"all"}
                   // option1="All"
                   // option2="Medicine"
                   // option3="Consumable"
                   // option4="Ornamental"
                   optionsData={[
-                    { label: "All", color: "green-800", value: 1 },
-                    { label: "Medicine", color: "red-400", value: 2 },
-                    { label: "Consumable", color: "yellow-500", value: 3 },
-                    { label: "Ornamental", color: "pink-400", value: 4 }]}
+                    { label: "all", color: "green-800", value: 1 },
+                    { label: "medicine", color: "red-400", value: 2 },
+                    { label: "consumable", color: "yellow-500", value: 3 },
+                    { label: "ornamental", color: "pink-400", value: 4 }]}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
@@ -87,7 +122,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
             </View>
             <ScrollView className="px-4 rounded-t-2xl">
               <View>
-                {descriptionTab === 1 && (
+                {/* {descriptionTab === 1 && (
                   <View>{plants.map(renderPlantListItem)}</View>
                 )}
                 {descriptionTab === 2 && (
@@ -116,7 +151,8 @@ const PlantLibraryScreen = ({ navigation, route }) => {
                       )
                       .map(renderPlantListItem)}
                   </View>
-                )}
+                )} */}
+                {descriptionTab && filterPlantsByCategory(descriptionTab)}
               </View>
               <View className="mt-20 padding-2 border-t-1 border-t-white" />
             </ScrollView>

@@ -46,14 +46,14 @@ export default function InitiateCategoryTabs({ selectionMode, optionsData, onSel
             ))} */}
             {options.map((option) => (
                 <TouchableOpacity
-                    key={option.value}
+                    key={option.label}
                     activeOpacity={1}
-                    onPress={() => updateSwitchData(option.value)}
-                    className={`${getSelectionMode === option.value ? "bg-" + option.color : 'bg-' + option.color + ' opacity-50'}
-                                ${getSelectionMode === option.value ? "mt-0" : "mt-4"} 
+                    onPress={() => updateSwitchData(option.label)}
+                    className={`${getSelectionMode === option.label ? "bg-" + option.color : 'bg-' + option.color + ' opacity-50'}
+                                ${getSelectionMode === option.label ? "mt-0" : "mt-4"} 
                                 flex-1 rounded-tl-2xl rounded-tr-2xl justify-center items-center
                                 `}>
-                    <Text className={`${getSelectionMode === option.value ?
+                    <Text className={`${getSelectionMode === option.label ?
                         "text-white text-sm font-josesans-reg" :
                         "text-gray-600 text-xs font-josesans-reg"}`}>
                         {option.label}
