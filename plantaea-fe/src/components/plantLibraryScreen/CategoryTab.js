@@ -12,7 +12,6 @@ export default function InitiateCategoryTabs({ selectionMode, optionsData, onSel
     useEffect(() => {
         const preparedOptions = optionsData.map((option, index) => ({
             ...option,
-            value: index + 1,
         }));
         setOptions(preparedOptions);
     }, [optionsData])

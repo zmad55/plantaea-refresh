@@ -62,10 +62,10 @@ const PlantLibraryScreen = ({ navigation, route }) => {
                   // option3="Consumable"
                   // option4="Ornamental"
                   optionsData={[
-                    { label: "All", color: "green-800" },
-                    { label: "Medicine", color: "red-400" },
-                    { label: "Consumable", color: "yellow-500" },
-                    { label: "Ornamental", color: "pink-400" }]}
+                    { label: "All", color: "green-800", value: 1 },
+                    { label: "Medicine", color: "red-400", value: 2 },
+                    { label: "Consumable", color: "yellow-500", value: 3 },
+                    { label: "Ornamental", color: "pink-400", value: 4 }]}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
