@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-  StatusBar,
-  Platform
-} from "react-native";
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator, StatusBar, Platform } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -49,8 +40,8 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white", paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-      <View className="bg-gray-200 pb-10">
+    <SafeAreaView className="flex-1 pt-10 bg-white">
+      <View className="bg-gray-200 h-full">
         {isLoading &&
           <View className="flex flex-col items-center justify-center h-full">
             <ActivityIndicator animating={true} color="darkgreen" size="large" />
@@ -61,11 +52,9 @@ const PlantLibraryScreen = ({ navigation, route }) => {
         ) : null}
         {!isLoading && plants.length ? (
           <View>
-            <View className="items-center pt-6 bg-white shadow-2xl rounded-b-2xl mb-2">
-              <Text className="mt-2 text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">
-                PLANT LIBRARY
-              </Text>
-              <View className="flex-row items-center justify-between px-8 mt-8 rounded-md">
+            <View className="items-center bg-white shadow-2xl rounded-b-2xl mb-2">
+              <Text className="text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">PLANT LIBRARY</Text>
+              <View className="flex-row items-center justify-between px-8 mt-6 rounded-md">
                 <CategoryTab
                   selectionMode={1}
                   option1="All"

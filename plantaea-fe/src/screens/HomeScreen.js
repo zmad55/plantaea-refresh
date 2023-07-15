@@ -17,10 +17,10 @@ const HomeScreen = ({ navigation }) => {
     const username = userInfo.user.charAt(0).toUpperCase() + userInfo.user.slice(1);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "white", paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-            <View className="flex-1 mt-6 bg-gray-200">
-                <View className="p-2 bg-white rounded-b-3xl">
-                    <Text className="text-2xl font-light tracking-widest self-left text-emerald-800 font-josesans-reg">Good Day {username}</Text>
+        <SafeAreaView className="flex-1 pt-10 bg-white">
+            <View className="flex-1 bg-gray-200">
+                <View className="px-2 pb-2 bg-white rounded-b-3xl">
+                    <Text className="text-2xl font-light tracking-widest self-left text-emerald-800 font-josesans-reg pl-3">Good Day {username}</Text>
                     <ScrollView>
                         <FlipCard flipHorizontal={true} flipVertical={false} className="h-full my-5 mx-9">
                             <FeaturedPlantCardFront text="Tap me" />
@@ -29,19 +29,7 @@ const HomeScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
                 <ScrollView className="flex-1 align-center">
-                    <View className="my-5 mx-11">
-                        <TouchableOpacity
-                            className="flex-row items-center justify-between px-4 py-1 bg-white border border-gray-300 rounded-full shadow-md"
-                            onPress={() => navigation.navigate('PlantLibraryStack')}
-                        >
-                            <Text className="flex-1 pt-2 pb-2 pr-12 text-gray-700 font-josesans">Search plant</Text>
-                            <Ionicons
-                                name="search-sharp"
-                                size={22}
-                                className="mr-0 text-emerald-500" />
-                        </TouchableOpacity>
-                    </View>
-                    <View className="flex-1 mx-2 mb-5">
+                    <View className="flex-1 mx-2 mb-5 my-5">
                         <View className="flex-row justify-evenly">
                             <DirectoryCard
                                 iconName={"journal-sharp"}
