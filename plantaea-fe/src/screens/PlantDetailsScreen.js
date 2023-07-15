@@ -39,6 +39,13 @@ const PlantDetailsScreen = ({ navigation, route }) => {
         className="w-full h-full"
           source={{ uri: plantImage }} />
       </View>
+      <View className="flex-1 bg-gray-200 rounded-t-3xl -mt-16 p-5">
+        <View className="flex-row">
+          <Text className="font-josesans-reg font-bold tracking-wide text-2xl">{route.params?.localName}</Text>
+          <View className="w-2"/>
+          <Text className="font-josesans tracking-wide text-lg">({route.params?.scientificName})</Text>
+        </View>
+      </View>
     </SafeAreaView>
   )
   // return (

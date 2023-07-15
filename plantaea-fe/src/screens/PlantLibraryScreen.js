@@ -57,10 +57,15 @@ const PlantLibraryScreen = ({ navigation, route }) => {
               <View className="flex-row items-center justify-between px-8 mt-6 rounded-md">
                 <CategoryTab
                   selectionMode={1}
-                  option1="All"
-                  option2="Medicine"
-                  option3="Consumable"
-                  option4="Ornamental"
+                  // option1="All"
+                  // option2="Medicine"
+                  // option3="Consumable"
+                  // option4="Ornamental"
+                  optionsData={[
+                    { label: "All", color: "green-800" },
+                    { label: "Medicine", color: "red-400" },
+                    { label: "Consumable", color: "yellow-500" },
+                    { label: "Ornamental", color: "pink-400" }]}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
