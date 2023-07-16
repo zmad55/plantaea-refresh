@@ -22,24 +22,22 @@ export default function ListPlant({ image, scientificName, localName, category, 
     }, []);
 
     return (
-        <View>
-            <View className="flex-row items-center flex-1">
-                <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 p-3 m-1 bg-white shadow-md rounded-2xl">
-                    <Image source={{ uri: plantImage }} className="mr-4 rounded-full w-14 h-14" />
-                    <View>
-                        <Text className="text-black font-josesans">{localName}</Text>
-                        <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>
-                        <View className="flex-row">
-                            {(() => {
-                                const hasMedicine = category.includes('medicine');
-                                const hasConsumable = category.includes('consumable');
-                                const hasOrnamental = category.includes('ornamental');
-                                return createPlantTag(hasMedicine, hasConsumable, hasOrnamental);
-                            })()}
-                        </View>
+        <View className="flex-row items-center">
+            <TouchableOpacity onPress={onPress} className="flex-row items-center flex-1 p-3 m-1 bg-white shadow-md rounded-2xl">
+                <Image source={{ uri: plantImage }} className="mr-4 rounded-full w-14 h-14" />
+                <View>
+                    <Text className="text-black font-josesans">{localName}</Text>
+                    <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>
+                    <View className="flex-row">
+                        {(() => {
+                            const hasMedicine = category.includes('medicine');
+                            const hasConsumable = category.includes('consumable');
+                            const hasOrnamental = category.includes('ornamental');
+                            return createPlantTag(hasMedicine, hasConsumable, hasOrnamental);
+                        })()}
                     </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         </View>
     )
 }
