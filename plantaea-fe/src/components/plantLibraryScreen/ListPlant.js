@@ -30,9 +30,9 @@ export default function ListPlant({ image, scientificName, localName, category, 
                     <Text className="text-xs italic font-josesans text-emerald-500">{scientificName}</Text>
                     <View className="flex-row">
                         {(() => {
-                            const hasMedicine = category.includes('medicine');
-                            const hasConsumable = category.includes('consumable');
-                            const hasOrnamental = category.includes('ornamental');
+                            const hasMedicine = category.hasOwnProperty('Medicine');
+                            const hasConsumable = category.hasOwnProperty('Consumable');
+                            const hasOrnamental = category.hasOwnProperty('Ornamental');
                             return createPlantTag(hasMedicine, hasConsumable, hasOrnamental);
                         })()}
                     </View>

@@ -12,7 +12,7 @@ import { setPlantsData } from "@redux/slices/plantSlice";
 const PlantLibraryScreen = ({ navigation, route }) => {
   const { data: plants, isLoading, isError } = useFetchPlantsDataQuery();
 
-  // const [category, setCategory] = useState("all");
+  // const [category, setCategory] = useState("All");
   // const filterPlantsByCategory = (category) => {
   //   setCategory(category);
   // };
@@ -23,7 +23,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
       image={item.imgFileName}
       scientificName={item.scientificName}
       localName={item.localName}
-      category={item.category.flat()}
+      category={item.category[0][0]}
       onPress={() =>
         navigation.navigate("Plant Details", {
           image: item.imgFileName,
@@ -33,7 +33,7 @@ const PlantLibraryScreen = ({ navigation, route }) => {
           use: item.use,
           taxonomy: item.taxonomy,
           category: item.category,
-          id: item.id,
+          id: item._id,
         })
       }
     />
@@ -43,11 +43,11 @@ const PlantLibraryScreen = ({ navigation, route }) => {
   useEffect(() => {
     setPlantsFiltered(plants);
   }, [plants]);
-  
+
   const filteredPlants = (category) => {
     try {
-      if (category !== "all") {
-        setPlantsFiltered(plants.filter((item) => item.category.flat().includes(category)))
+      if (category !== "All") {
+        setPlantsFiltered(plants.filter((item) => item.category[0][0].hasOwnProperty(category)))
       } else {
         setPlantsFiltered(plants)
       }
@@ -72,12 +72,12 @@ const PlantLibraryScreen = ({ navigation, route }) => {
             <Text className="text-2xl font-light tracking-widest font-josesans-reg text-emerald-800">PLANT LIBRARY</Text>
             <View className="flex-row items-center justify-between px-8 mt-6 rounded-md">
               <CategoryTab
-                selectionMode={"all"}
+                selectionMode={"All"}
                 optionsData={[
-                  { label: "all", color: "green-800", value: 1 },
-                  { label: "medicine", color: "red-400", value: 2 },
-                  { label: "consumable", color: "yellow-500", value: 3 },
-                  { label: "ornamental", color: "pink-400", value: 4 }]}
+                  { label: "All", color: "green-800" },
+                  { label: "Medicine", color: "red-400" },
+                  { label: "Consumable", color: "yellow-500" },
+                  { label: "Ornamental", color: "pink-400" }]}
                 onSelectSwitch={filteredPlants}
               />
             </View>
