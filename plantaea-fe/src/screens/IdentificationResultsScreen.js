@@ -8,8 +8,9 @@ import PlantCard from '../components/PlantCard'
 
 const IdentificationResultsScreen = ({ navigation, route }) => {
   const data = route.params?.data
+  const regularData = data.responseJson.features
 
-  console.log(data)
+  console.log(regularData)
   return (
     <View className="flex-1 pt-10">
       <View className="px-2 pb-2 rounded-b-3xl">
@@ -20,11 +21,8 @@ const IdentificationResultsScreen = ({ navigation, route }) => {
         {/* <Text>hello</Text> */}
         <Carousel
           containerCustomStyle={{ overflow: 'visible' }}
-          data={data}
-          renderItem={({ item }) => <PlantCard item={{
-            total_rank: item.responseJson.features.total_rank,
-            species: item.responseJson.features.species
-          }} />}
+          data={regularData}
+          renderItem={({ item }) => <PlantCard item={item} />}
           firstItem={0}
           loop={true}
           inactiveSlideScale={0.75}
