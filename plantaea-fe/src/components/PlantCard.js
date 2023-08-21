@@ -5,11 +5,11 @@ const PlantCard = ({ item }) => {
     return (
         <View className="rounded-3xl bg-emerald-500 h-3/5 w-full p-5">
             <View className="flex-row justify-center p-5">
-                {/* <Image source={item.image} className="h-32 w-32 rounded-full"/> */}
+                <Image source={require('../../assets/images/test.gif')} className="h-32 w-32 rounded-full"/>
             </View>
             <View className="items-center">
                 <Text className="text-3xl text-emerald-200 font-josesans-reg">#{item.total_rank}</Text>
-                <Text className="text-3xl text-emerald-200 font-josesans-reg">{item.species}</Text>
+                <Text className="text-2xl text-emerald-200 font-josesans-reg">{item.species}</Text>
             </View>
         </View>
     );

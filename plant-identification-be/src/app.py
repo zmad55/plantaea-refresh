@@ -55,7 +55,6 @@ def process_image():
         for idx,species in enumerate(sorted_species, start=1):
             ranking.append({"total_rank": idx, "species" : species})
 
-
         return {"message" : 'success', "features" : ranking}
 
 
