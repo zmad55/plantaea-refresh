@@ -8,6 +8,7 @@ import MapStack from './MapStack';
 import CameraStack from './CameraStack';
 import LibraryStack from './PlantLibraryStack';
 
+import IdentificationResultsScreen from "./../screens/IdentificationResultsScreen";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function HomeStack({ navigation, route }) {
         ),
         headerTransparent: true,
       }} />
+
       <Stack.Screen name="MapStack" component={MapStack}
         options={{
           headerShown: true,
@@ -40,9 +42,24 @@ export default function HomeStack({ navigation, route }) {
           ),
           headerTransparent: true,
         }} />
+
       <Stack.Screen name="LibraryStack" component={LibraryStack}
         options={{
           headerShown: false
+        }} />
+
+      <Stack.Screen name="IdentificationResultsScreen" component={IdentificationResultsScreen}
+        options={{
+          headerShown: true,
+          title: '',
+          headerBackImage: () => (
+            <Ionicons
+              name="caret-back-circle-sharp"
+              size={40}
+              color='white'
+            />
+          ),
+          headerTransparent: true,
         }} />
     </Stack.Navigator>
   );
